@@ -1,43 +1,43 @@
 ---
-import type { ImageMetadata } from 'astro'
-import { getCollection } from 'astro:content'
+// import type { ImageMetadata } from 'astro'
+// import { getCollection } from 'astro:content'
 
-import Layout from '../components/Layouts/Layout.astro'
-import FeaturedBlogPost from '../components/Blog/FeaturedBlogPost.astro'
-import BlogPost from '../components/Blog/BlogPost.astro'
-import { type BlogArticle } from '../types/BlogArticle'
-import ContentSection from '../components/Layout/ContentSection.astro'
-import {
-    BlogSchema,
-} from '../schema/BlogSchema'
+// import Layout from '../components/Layouts/Layout.astro'
+// import FeaturedBlogPost from '../components/Blog/FeaturedBlogPost.astro'
+// import BlogPost from '../components/Blog/BlogPost.astro'
+// import { type BlogArticle } from '../types/BlogArticle'
+// import ContentSection from '../components/Layout/ContentSection.astro'
+// import {
+//     BlogSchema,
+// } from '../schema/BlogSchema'
 
-const blogCollection = await getCollection('blog')
+// const blogCollection = await getCollection('blog')
 
-let blogArticles: Array<any> = blogCollection.map((entry: typeof BlogSchema) => {
-    return {
-        title: entry.data.title,
-        description: entry.data.description,
-        slug: entry.slug,
-        link: `${ Astro.url.pathname }/${ entry.slug }`,
-        date: entry.data.datePublished.toDateString(),
-        image: entry.data.imageSrc as ImageMetadata,
-        imageAlt: entry.data.imageAlt,
-    } as BlogArticle;
-})
+// let blogArticles: Array<any> = blogCollection.map((entry: typeof BlogSchema) => {
+//     return {
+//         title: entry.data.title,
+//         description: entry.data.description,
+//         slug: entry.slug,
+//         link: `${ Astro.url.pathname }/${ entry.slug }`,
+//         date: entry.data.datePublished.toDateString(),
+//         image: entry.data.imageSrc as ImageMetadata,
+//         imageAlt: entry.data.imageAlt,
+//     } as BlogArticle;
+// })
 
-const featuredArticle = blogArticles[0]
+// const featuredArticle = blogArticles[0]
 
-let paginated = false
+// let paginated = false
 
-if (blogArticles.length > 9) {
-    paginated = true
+// if (blogArticles.length > 9) {
+//     paginated = true
 
-    blogArticles = blogArticles.toSpliced(0, 9)
-}
+//     blogArticles = blogArticles.toSpliced(0, 9)
+// }
 
 ---
 
-<Layout title="Blog" description="Find out all the latest news about the oldest thing: space!">
+<!-- <Layout title="Blog" description="Find out all the latest news about the oldest thing: space!">
     <ContentSection class="!from-black !to-gray-950">
         <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
         <FeaturedBlogPost post={{ ...featuredArticle  }} />
@@ -55,4 +55,6 @@ if (blogArticles.length > 9) {
             </div>
         }
     </ContentSection>
-</Layout>
+</Layout> -->
+
+<h1 class="text-red">Hi</h1>

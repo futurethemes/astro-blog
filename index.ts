@@ -1,5 +1,6 @@
 import type { AstroIntegration } from "astro"
 import tailwind from '@astrojs/tailwind'
+import { resolve } from 'node:path'
 
 import { type AstroBlogPluginConfig, ThemeConfig, updateThemeConfig } from "./src/Config/config"
 import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
@@ -23,21 +24,39 @@ export default function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIn
                     entrypoint: '@futurethemes/astro-blog-plugin/blog.astro'
                 })
 
-                injectRoute({
-                    pattern: '/blog/[page]',
-                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
-                })
+                // injectRoute({
+                //     pattern: '/blog/[page]',
+                //     entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
+                // })
 
-                injectRoute({
-                    pattern: '/blog/[...slug]',
-                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
-                })
+                // injectRoute({
+                //     pattern: '/blog/[...slug]',
+                //     entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
+                // })
+
+                // injectScript("page-ssr", `import '@astrojs/tailwind/base.css';`);
+
+                const isTailwindAlreadyInstalled = config.integrations.find(integration => integration.name == '@astrojs/tailwind') !== undefined
+
+                if (isTailwindAlreadyInstalled) {
+                    logger.warn('Tailwind is already installed in this project! Make sure to add the Astro Blog Plugin paths to your Tailwind config or the blog pages won\'t style correctly!')
+                }
+
+                const integrations = []
+
+                if (!isTailwindAlreadyInstalled) {
+                    integrations.push(
+                        tailwind({
+                            configFile: resolve(process.cwd(), 'node_modules/@futurethemes/astro-blog-plugin/tailwind.config.mjs'),
+                            applyBaseStyles: false,
+                            nesting: false,
+                        }),
+                    )
+                }
 
                 try {
                     updateConfig({
-                        integrations: [
-                            tailwind(),
-                        ],
+                        integrations,
                         vite: {
                             plugins: [
                                 vitePluginAstroBlogPluginUserConfig(ThemeConfig, config),
