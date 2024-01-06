@@ -3,9 +3,9 @@ import type { AstroIntegration } from "astro"
 import { type AstroBlogPluginConfig, ThemeConfig, updateThemeConfig } from "./src/Config/config"
 import { vitePluginGalaxyUserConfig } from './src/integrations/virtual-user-config'
 
-export default function AstroBlogPluginIntegration(options: AstroBlogPluginConfig): AstroIntegration {
+export default function vitePluginAstroBlogPluginUserConfig(options: AstroBlogPluginConfig): AstroIntegration {
     return {
-        name: '@futurethemes/galaxy-theme',
+        name: '@futurethemes/astro-blog-plugin',
         hooks: {
             'astro:config:setup': async ({
                 injectRoute,
@@ -16,55 +16,21 @@ export default function AstroBlogPluginIntegration(options: AstroBlogPluginConfi
                 config,
             }) => {
                 updateThemeConfig(options)
-
-                // Check if the footer has more than 2 entries and give a warning
-                if (options.footerNav && Object.keys(options.footerNav).length > 2) {
-                    logger.warn('[config.footerNav] contains more than 2 sections. I\'m not going to stop you... But things could get weird. It\'s best to stick with 2 if you can. But you can have an unlimited amount of links per section!')
-                }
                 
                 injectRoute({
-                    pattern: '404',
-                    entrypoint: '@futurethemes/galaxy-theme/404.astro'
+                    pattern: '/blog',
+                    entrypoint: '@futurethemes/astro-blog-plugin/blog.astro'
                 })
 
                 injectRoute({
-                    pattern: '',
-                    entrypoint: '@futurethemes/galaxy-theme/index.astro'
+                    pattern: '/blog/[page]',
+                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
                 })
 
                 injectRoute({
-                    pattern: '/pricing',
-                    entrypoint: '@futurethemes/galaxy-theme/pricing.astro'
+                    pattern: '/blog/[...slug]',
+                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
                 })
-
-                injectRoute({
-                    pattern: '/about',
-                    entrypoint: '@futurethemes/galaxy-theme/about.astro'
-                })
-
-                if (options.blog) {
-                    injectRoute({
-                        pattern: '/blog',
-                        entrypoint: '@futurethemes/galaxy-theme/blog.astro'
-                    })
-    
-                    injectRoute({
-                        pattern: '/blog/[page]',
-                        entrypoint: '@futurethemes/galaxy-theme/blog/[page].astro'
-                    })
-    
-                    injectRoute({
-                        pattern: '/blog/[...slug]',
-                        entrypoint: '@futurethemes/galaxy-theme/blog/[...slug].astro'
-                    })
-                }
-
-                injectRoute({
-                    pattern: '[...slug]',
-                    entrypoint: '@futurethemes/galaxy-theme/page.astro'
-                })
-
-                addWatchFile(new URL('./tailwind.config.js', config.root));
 
                 try {
                     updateConfig({
