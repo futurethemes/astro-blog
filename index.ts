@@ -1,9 +1,10 @@
 import type { AstroIntegration } from "astro"
+import tailwind from '@astrojs/tailwind'
 
 import { type AstroBlogPluginConfig, ThemeConfig, updateThemeConfig } from "./src/Config/config"
-import { vitePluginGalaxyUserConfig } from './src/integrations/virtual-user-config'
+import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
 
-export default function vitePluginAstroBlogPluginUserConfig(options: AstroBlogPluginConfig): AstroIntegration {
+export default function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegration {
     return {
         name: '@futurethemes/astro-blog-plugin',
         hooks: {
@@ -34,9 +35,12 @@ export default function vitePluginAstroBlogPluginUserConfig(options: AstroBlogPl
 
                 try {
                     updateConfig({
+                        integrations: [
+                            tailwind(),
+                        ],
                         vite: {
                             plugins: [
-                                vitePluginGalaxyUserConfig(ThemeConfig, config),
+                                vitePluginAstroBlogPluginUserConfig(ThemeConfig, config),
                             ],
                         },
                     })
@@ -45,8 +49,10 @@ export default function vitePluginAstroBlogPluginUserConfig(options: AstroBlogPl
                     throw e
                 }
 
-                logger.info('Galaxy Theme Loaded!')
+                logger.info('Astro Blog Plugin Loaded!')
             }
         }
     }
 }
+
+export { BlogSchema } from './src/schema/BlogSchema'

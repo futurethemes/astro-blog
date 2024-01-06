@@ -11,13 +11,23 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.4",
+    "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.1.1",
     "typescript": "^5.3.3"
   },
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./blog.astro": "./src/pages/blog.astro",
+    "./blog/[page].astro": "./src/pages/[page].astro",
+    "./blog/[...slug].astro": "./src/pages/[...slug].astro",
+    "./schema": "./schema.ts"
   },
   "files": [
-    "./index.ts"
+    "./index.ts",
+    "./schema.ts",
+    "./tailwind.config.mjs",
+    "./tailwind.plugin.ts",
+    "./virtual.d.ts",
+    "./src/"
   ]
 }
