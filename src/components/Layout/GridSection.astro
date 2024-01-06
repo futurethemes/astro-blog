@@ -1,0 +1,21 @@
+---
+import Section from "./Section.astro";
+import Container from "./Container.astro";
+import Grid1X2 from "./Grid_1x2.astro";
+
+import { type ComponentProps } from '../../types/ComponentProps'
+
+const { class: classes, ...props } = Astro.props as ComponentProps
+---
+<Section
+	class="bg-gradient-to-b from-gray-950 to-gray-950"
+	class:list={[classes]}
+	{...props}
+>
+    <Container data-fade-in-scroll>
+		<Grid1X2>
+			<slot name="left" slot="left" />
+			<slot name="right" slot="right" />
+		</Grid1X2>
+    </Container>
+</Section>

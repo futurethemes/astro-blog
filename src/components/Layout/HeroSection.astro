@@ -1,0 +1,19 @@
+---
+import Section from "./Section.astro";
+import Container from "./Container.astro";
+
+import Triangle from "../Triangle.astro";
+
+import { type ComponentProps } from '../../types/ComponentProps'
+
+const { class: classes } = Astro.props as ComponentProps
+---
+<Section
+    class="bg-gradient-to-b from-black to-gray-950"
+    class:list={[classes]}
+>
+    <Container class="min-h-[calc(100svh_-_73px)] flex flex-col items-center justify-center">
+        <slot />
+    </Container>
+    <Triangle class="absolute bottom-8 left-1/2 -translate-x-1/2" data-fade-in-load />
+</Section>
