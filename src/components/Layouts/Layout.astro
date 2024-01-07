@@ -1,7 +1,7 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
-import { SEO } from 'astro-seo'
-import config from 'virtual:galaxy-theme/user-config'
+// import { ViewTransitions } from 'astro:transitions'
+// import { SEO } from 'astro-seo'
+// import config from 'virtual:galaxy-theme/user-config'
 
 type Props = {
     /**
@@ -17,23 +17,23 @@ type Props = {
     openGraph?: any,
 }
 
-import MobileNav from '../Nav/MobileNav.astro'
-import Footer from '../Footer.astro'
+// import MobileNav from '../Nav/MobileNav.astro'
+// import Footer from '../Footer.astro'
 // import SiteBanner from '@components/SiteBanner.astro'
-import Starfield from '../Starfield.astro'
-import Navbar from '..//Nav/Navbar.astro'
+// import Starfield from '../Starfield.astro'
+// import Navbar from '../Nav/Navbar.astro'
 
-const { title, description, openGraph }: Props = Astro.props
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
+// const { title, description, openGraph }: Props = Astro.props
+// const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
 
-const { siteName } = config
+// const { siteName } = config
 ---
 
-<script>
+<!-- <script>
     import '../../scripts/fade-in'
 
     import '../../styles/global.css'
-</script>
+</script> -->
 
 <html lang="en" transition:animate="none">
 	<head>
@@ -42,7 +42,7 @@ const { siteName } = config
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 
-        <SEO
+        <!-- <SEO
             {title}
             titleTemplate={`%s - ${ siteName }`}
             {description}
@@ -55,15 +55,15 @@ const { siteName } = config
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;600;700&family=Titillium+Web:wght@400;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;600;700&family=Titillium+Web:wght@400;900&display=swap" rel="stylesheet"> -->
 	</head>
 	<body class="bg-black min-h-[100vh]">
         <!-- <SiteBanner /> -->
-        <Navbar />
+        <!-- <Navbar /> -->
 		<slot />
-        <Footer />
+        <!-- <Footer />
         <Starfield />
-        <MobileNav />
+        <MobileNav /> -->
 	</body>
 </html>
 

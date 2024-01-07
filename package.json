@@ -12,14 +12,17 @@
   "dependencies": {
     "@astrojs/check": "^0.3.4",
     "@astrojs/tailwind": "^5.1.0",
+    "@futurethemes/astro-blog-plugin": "link:.",
     "astro": "^4.1.1",
-    "typescript": "^5.3.3"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite-plugin-dynamic-import": "^1.5.0"
   },
   "exports": {
     ".": "./index.ts",
-    "./blog.astro": "./src/pages/blog.astro",
-    "./blog/[page].astro": "./src/pages/[page].astro",
-    "./blog/[...slug].astro": "./src/pages/[...slug].astro",
+    "./blog.astro": "./src/routes/blog.astro",
+    "./blog/[page].astro": "./src/routes/[page].astro",
+    "./blog/[...slug].astro": "./src/routes/[...slug].astro",
     "./schema": "./schema.ts"
   },
   "files": [

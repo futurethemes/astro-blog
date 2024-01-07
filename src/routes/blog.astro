@@ -1,4 +1,22 @@
 ---
+import { relative, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import config from 'virtual:astro-blog-plugin/user-config'
+
+const relativePath = relative(dirname(fileURLToPath(import.meta.url)), config.layoutComponent)
+
+
+const newUrl = new URL(relativePath, import.meta.url).pathname
+
+let Layout
+
+try {
+    Layout = await import(/* @vite-ignore */ newUrl)
+
+    Layout = Layout.default
+} catch (e) {
+    console.error(e)
+}
 // import type { ImageMetadata } from 'astro'
 // import { getCollection } from 'astro:content'
 
@@ -57,4 +75,6 @@
     </ContentSection>
 </Layout> -->
 
-<h1 class="text-red">Hi</h1>
+<Layout>
+    <h1 class="text-red-500 font-black text-6xl">Hifef</h1>
+</Layout>

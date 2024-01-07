@@ -11,12 +11,21 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.1.1)(tailwindcss@3.4.1)
+  '@futurethemes/astro-blog-plugin':
+    specifier: link:.
+    version: 'link:'
   astro:
     specifier: ^4.1.1
     version: 4.1.1(typescript@5.3.3)
+  tailwindcss:
+    specifier: ^3.4.1
+    version: 3.4.1
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
+  vite-plugin-dynamic-import:
+    specifier: ^1.5.0
+    version: 1.5.0
 
 packages:
 
@@ -3775,6 +3784,15 @@ packages:
       '@types/unist': 3.0.2
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
+    dev: false
+
+  /vite-plugin-dynamic-import@1.5.0:
+    resolution: {integrity: sha512-Qp85c+AVJmLa8MLni74U4BDiWpUeFNx7NJqbGZyR2XJOU7mgW0cb7nwlAMucFyM4arEd92Nfxp4j44xPi6Fu7g==}
+    dependencies:
+      acorn: 8.11.3
+      es-module-lexer: 1.4.1
+      fast-glob: 3.3.2
+      magic-string: 0.30.5
     dev: false
 
   /vite@5.0.11:

@@ -1,9 +1,11 @@
+import { AstroBlogPluginTailwindContentPaths } from './tailwind.plugin'
+
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: {
-        relative: true,
-        files: ['./node_modules/@futurethemes/astro-blog-plugin/src/**/*.astro'],
-    },
+	content: [
+        './src/**/*.{astro,html,js,jsx,ts,tsx}',
+        ...AstroBlogPluginTailwindContentPaths,
+    ],
 	theme: {
 		extend: {},
 	},

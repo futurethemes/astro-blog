@@ -25,19 +25,23 @@ export type AstroBlogPluginConfig = {
     ogImage?: string | null,
 }
 
-export let ThemeConfig: AstroBlogPluginConfig = {
+export let Config: AstroBlogPluginConfig = {
     layoutComponent: null,
     ogImage: null,
 }
 
-export function updateThemeConfig(newThemeConfig: Partial<AstroBlogPluginConfig>) {
-    if (newThemeConfig === undefined || newThemeConfig === null) {
+export function updateConfig(newConfig: Partial<AstroBlogPluginConfig>) {
+    if (newConfig === undefined || newConfig === null) {
         return;
     }
 
-    for (let key of Object.keys(ThemeConfig)) {
-        if (newThemeConfig[key]) {
-            ThemeConfig[key] = newThemeConfig[key]
+    for (let key of Object.keys(Config)) {
+        if (newConfig[key]) {
+            Config[key] = newConfig[key]
         }
     }
+}
+
+export function getConfig() {
+    return Config
 }
