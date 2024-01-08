@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     tailwind(),
     AstroBlogPlugin({
-        layoutComponent: './src/components/Layouts/Layout.astro',
+        title: 'Test Site',
     }),
   ],
   vite: {

@@ -23,7 +23,12 @@
     "./blog.astro": "./src/routes/blog.astro",
     "./blog/[page].astro": "./src/routes/[page].astro",
     "./blog/[...slug].astro": "./src/routes/[...slug].astro",
-    "./schema": "./schema.ts"
+    "./schema": "./schema.ts",
+
+    "./components/Layout.astro": {
+      "types": "./components/Layouts/Layout.astro.tsx",
+      "import": "./components/Layouts/Layout.astro"
+    }
   },
   "files": [
     "./index.ts",

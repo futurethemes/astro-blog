@@ -1,6 +1,8 @@
 import type { AstroConfig, ViteUserConfig } from 'astro'
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { type AstroBlogPluginConfig } from '../Config/config'
+import { type AstroBlogPluginConfig } from '../schema/UserConfigSchema'
 
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`
@@ -17,8 +19,12 @@ export function vitePluginAstroBlogPluginUserConfig(
 		build: Pick<AstroConfig['build'], 'format'>
 	}
 ): NonNullable<ViteUserConfig['plugins']>[number] {
+	const resolveId = (id: string) =>
+		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
+
     const modules = {
         'virtual:astro-blog-plugin/user-config': `export default ${ JSON.stringify(opts) }`,
+		'virtual:astro-blog-plugin/components': `export { default as Layout } from ${ resolveId(opts.layoutComponent) };`
     } satisfies Record<string, string>
 
     /** Mapping names prefixed with `\0` to their original form. */
@@ -30,7 +36,7 @@ export function vitePluginAstroBlogPluginUserConfig(
 	)
 
     return {
-		name: 'vite-plugin-galaxy-user-config',
+		name: 'vite-plugin-astro-blog-plugin-user-config',
 		resolveId(id): string | void {
 			if (id in modules) return resolveVirtualModuleId(id)
 		},

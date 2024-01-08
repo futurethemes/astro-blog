@@ -1,8 +1,6 @@
 import type { AstroIntegration } from "astro"
-import { join, resolve, relative, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-import { type AstroBlogPluginConfig, Config, updateConfig as updateAstroBlogPluginConfig, getConfig } from "./src/Config/config"
+import { UserConfigSchema, type AstroBlogPluginConfig } from './src/schema/UserConfigSchema'
 import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
 
 export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegration {
@@ -17,8 +15,9 @@ export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegratio
                 logger,
                 config,
             }) => {
+                const userConfig = UserConfigSchema.safeParse(options)
 
-                updateAstroBlogPluginConfig(options)
+                console.log(userConfig, options)
                 
                 injectRoute({
                     pattern: '/blog',
@@ -41,7 +40,7 @@ export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegratio
                     updateConfig({
                         vite: {
                             plugins: [
-                                vitePluginAstroBlogPluginUserConfig(getConfig(), config),
+                                vitePluginAstroBlogPluginUserConfig(userConfig.data, config),
                             ],
                         },
                     })
