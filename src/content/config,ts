@@ -1,0 +1,20 @@
+import { defineCollection } from 'astro:content'
+import { BlogSchema, AuthorSchema, TagSchema } from "@futurethemes/astro-blog-plugin";
+
+export const collections = {
+    blog: defineCollection({
+        type: 'content',
+        schema: BlogSchema(),
+    }),
+
+
+    author: defineCollection({
+        type: 'content',
+        schema: AuthorSchema(),
+    }),
+
+    tag: defineCollection({
+        type: 'content',
+        schema: TagSchema(),
+    }),
+}

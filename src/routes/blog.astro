@@ -1,51 +1,55 @@
 ---
 import { relative, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { z } from 'astro/zod'
 import config from 'virtual:astro-blog-plugin/user-config'
-import { Layout } from '@futurethemes/astro-blog-plugin/components/Layout.astro'
+import Layout from '@futurethemes/astro-blog-plugin/components/Layout.astro'
+import FeaturedBlogArticle from '@futurethemes/astro-blog-plugin/components/FeaturedBlogArticle.astro'
+import BlogPost from '@futurethemes/astro-blog-plugin/components/BlogPost.astro'
+import type { ImageMetadata } from 'astro'
+import { BlogSchema } from '../schema/BlogSchema'
+import { getCollection } from 'astro:content'
 
-// import type { ImageMetadata } from 'astro'
-// import { getCollection } from 'astro:content'
 
 // import Layout from '../components/Layouts/Layout.astro'
-// import FeaturedBlogPost from '../components/Blog/FeaturedBlogPost.astro'
 // import BlogPost from '../components/Blog/BlogPost.astro'
-// import { type BlogArticle } from '../types/BlogArticle'
 // import ContentSection from '../components/Layout/ContentSection.astro'
 // import {
 //     BlogSchema,
 // } from '../schema/BlogSchema'
 
-// const blogCollection = await getCollection('blog')
+const blogCollection = await getCollection('blog')
 
-// let blogArticles: Array<any> = blogCollection.map((entry: typeof BlogSchema) => {
-//     return {
-//         title: entry.data.title,
-//         description: entry.data.description,
-//         slug: entry.slug,
-//         link: `${ Astro.url.pathname }/${ entry.slug }`,
-//         date: entry.data.datePublished.toDateString(),
-//         image: entry.data.imageSrc as ImageMetadata,
-//         imageAlt: entry.data.imageAlt,
-//     } as BlogArticle;
-// })
+let blogArticles: Array<any> = blogCollection.map((entry: typeof BlogSchema) => {
+    return {
+        title: entry.data.title,
+        description: entry.data.description,
+        slug: entry.slug,
+        link: `${ Astro.url.pathname }/${ entry.slug }`,
+        date: entry.data.datePublished.toDateString(),
+        image: entry.data.imageSrc as ImageMetadata,
+        imageAlt: entry.data.imageAlt,
+    } as z.infer<typeof BlogSchema>;
+})
 
-// const featuredArticle = blogArticles[0]
+console.log(blogArticles)
 
-// let paginated = false
+const featuredArticle = blogArticles[0]
 
-// if (blogArticles.length > 9) {
-//     paginated = true
+let paginated = false
 
-//     blogArticles = blogArticles.toSpliced(0, 9)
-// }
+if (blogArticles.length > 9) {
+    paginated = true
+
+    blogArticles = blogArticles.toSpliced(0, 9)
+}
 
 ---
 
 <!-- <Layout title="Blog" description="Find out all the latest news about the oldest thing: space!">
     <ContentSection class="!from-black !to-gray-950">
         <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
-        <FeaturedBlogPost post={{ ...featuredArticle  }} />
+        <FeaturedBlogArticle post={{ ...featuredArticle  }} />
         <hr class="my-8 border-slate-200/50">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             {
@@ -63,5 +67,20 @@ import { Layout } from '@futurethemes/astro-blog-plugin/components/Layout.astro'
 </Layout> -->
 
 <Layout>
-    <h1 class="text-red-500 font-black text-6xl">Hifef</h1>
+    <h1 class="text-red-500 font-black text-6xl">Blog</h1>
+    <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
+        <FeaturedBlogArticle post={{ ...featuredArticle  }} />
+        <hr class="my-8 border-slate-200/50">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {
+                blogArticles.map(article => (<></>
+                    <BlogPost post={{ ...article }} />
+                ))
+            }
+        </div>
+        {
+            paginated && <div class="flex items-center content-center justify-end gap-4 px-4">
+                <a href={ '/blog/1' } class="galaxy-gradient-background rounded-full px-4 py-2">Next Page</a>
+            </div>
+        }
 </Layout>

@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.4",
+    "@astrojs/mdx": "^2.0.3",
     "@astrojs/tailwind": "^5.1.0",
     "@futurethemes/astro-blog-plugin": "link:.",
     "astro": "^4.1.1",
+    "sharp": "^0.33.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite-plugin-dynamic-import": "^1.5.0"
@@ -24,11 +26,9 @@
     "./blog/[page].astro": "./src/routes/[page].astro",
     "./blog/[...slug].astro": "./src/routes/[...slug].astro",
     "./schema": "./schema.ts",
-
-    "./components/Layout.astro": {
-      "types": "./components/Layouts/Layout.astro.tsx",
-      "import": "./components/Layouts/Layout.astro"
-    }
+    "./components/Layout.astro": "./src/components/Layouts/Layout.astro",
+    "./components/FeaturedBlogArticle.astro": "./src/components/blog/FeaturedBlogArticle.astro",
+    "./components/BlogPost.astro": "./src/components/blog/BlogPost.astro"
   },
   "files": [
     "./index.ts",

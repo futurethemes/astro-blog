@@ -1,9 +1,9 @@
-import type { AstroIntegration } from "astro"
+import type { AstroIntegration } from "astro" 
 
-import { UserConfigSchema, type AstroBlogPluginConfig } from './src/schema/UserConfigSchema'
+import { UserConfigSchema, type AstroBlogPluginConfig, type AstroBlogPluginUserConfig } from './src/schema/UserConfigSchema'
 import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
 
-export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegration {
+export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegration {
     return {
         name: '@futurethemes/astro-blog-plugin',
         hooks: {
@@ -16,8 +16,6 @@ export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegratio
                 config,
             }) => {
                 const userConfig = UserConfigSchema.safeParse(options)
-
-                console.log(userConfig, options)
                 
                 injectRoute({
                     pattern: '/blog',
@@ -56,4 +54,6 @@ export function AstroBlogPlugin(options: AstroBlogPluginConfig): AstroIntegratio
 }
 
 export { BlogSchema } from './src/schema/BlogSchema'
+export { AuthorSchema } from './src/schema/AuthorSchema'
+export { TagSchema } from './src/schema/TagSchema'
 export { AstroBlogPluginTailwindContentPaths } from './tailwind.plugin'
