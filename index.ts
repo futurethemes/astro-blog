@@ -1,6 +1,7 @@
-import type { AstroIntegration } from "astro" 
+import type { AstroIntegration } from "astro"
+import { type SafeParseSuccess } from 'astro/zod'
 
-import { UserConfigSchema, type AstroBlogPluginConfig, type AstroBlogPluginUserConfig } from './src/schema/UserConfigSchema'
+import { UserConfigSchema, type AstroBlogPluginUserConfig, type AstroBlogPluginConfig } from './src/schema/UserConfigSchema'
 import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
 
 export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegration {
@@ -9,13 +10,11 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
         hooks: {
             'astro:config:setup': async ({
                 injectRoute,
-                injectScript,
                 updateConfig,
-                addWatchFile,
                 logger,
                 config,
             }) => {
-                const userConfig = UserConfigSchema.safeParse(options)
+                const userConfig = UserConfigSchema.safeParse(options) as SafeParseSuccess<AstroBlogPluginConfig>
                 
                 injectRoute({
                     pattern: '/blog',
@@ -43,7 +42,7 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
                         },
                     })
                 } catch (e) {
-                    logger.error(e.message)
+                    logger.error(e as string)
                     throw e
                 }
 

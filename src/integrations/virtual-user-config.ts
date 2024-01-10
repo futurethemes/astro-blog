@@ -11,10 +11,7 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 export function vitePluginAstroBlogPluginUserConfig(
 	opts: AstroBlogPluginConfig,
 	{
-		build,
 		root,
-		srcDir,
-		trailingSlash,
 	}: Pick<AstroConfig, 'root' | 'srcDir' | 'trailingSlash'> & {
 		build: Pick<AstroConfig['build'], 'format'>
 	}
