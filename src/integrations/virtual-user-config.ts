@@ -19,9 +19,38 @@ export function vitePluginAstroBlogPluginUserConfig(
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
+	const createUserImagesModule = (opts: AstroBlogPluginConfig) => {
+		let imagesModule = ''
+	
+		if (opts.logo) {
+			if (
+				!('src' in opts.logo) &&
+				!('dark' in opts.logo) &&
+				!('light' in opts.logo)
+			) {
+				throw new Error(' `logo` config is incorrect. You must specify at least one of `src`, `dark` or `light`.')
+			}
+
+			if ('src' in opts.logo) {
+				const src = resolveId(opts.logo.src)
+				imagesModule = `import src from ${src}; export const logos = { dark: src, light: src };`
+			} else {
+				const dark = resolveId(opts.logo.dark)
+				const light = resolveId(opts.logo.light)
+
+				imagesModule = `import dark from ${dark}; import light from ${light}; export const logos = { dark, light };`
+			}
+		} else {
+			imagesModule = 'export const logos = {}'
+		}
+	
+		return imagesModule
+	}
+
     const modules = {
         'virtual:astro-blog-plugin/user-config': `export default ${ JSON.stringify(opts) }`,
-		'virtual:astro-blog-plugin/components': `export { default as Layout } from ${ resolveId(opts.layoutComponent) };`
+		'virtual:astro-blog-plugin/components': `export { default as Layout } from ${ resolveId(opts.layoutComponent) };`,
+		'virtual:astro-blog-plugin/user-images': createUserImagesModule(opts),
     } satisfies Record<string, string>
 
     /** Mapping names prefixed with `\0` to their original form. */

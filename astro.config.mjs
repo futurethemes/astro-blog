@@ -5,8 +5,18 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'http://localhost',
   integrations: [tailwind(), AstroBlogPlugin({
-    title: 'Test Site'
+    title: 'Test Site',
+    layoutComponent: './src/components/Layouts/Layout2.astro',
+    logo: {
+      dark: './src/assets/images/logo.png',
+      light: './src/assets/images/logo-dark.png',
+      alt: 'The FutureThemes logo',
+    },
+    seo: {
+      title: 'Test Site',
+    },
   }), mdx()],
   image: {
     service: squooshImageService(),

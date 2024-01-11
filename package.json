@@ -15,6 +15,8 @@
     "@astrojs/tailwind": "^5.1.0",
     "@futurethemes/astro-blog-plugin": "link:.",
     "astro": "^4.1.1",
+    "astro-font": "^0.0.68",
+    "astro-seo": "^0.8.0",
     "sharp": "^0.33.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
