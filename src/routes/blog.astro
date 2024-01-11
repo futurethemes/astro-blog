@@ -31,29 +31,15 @@ if (blogArticles.length > 9) {
 
 ---
 
-<!-- <Layout title="Blog" description="Find out all the latest news about the oldest thing: space!">
-    <ContentSection class="!from-black !to-gray-950">
-        <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
-        <FeaturedBlogArticle post={{ ...featuredArticle  }} />
-        <hr class="my-8 border-slate-200/50">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {
-                blogArticles.map(article => (
-                    <BlogPost post={{ ...article }} />
-                ))
-            }
-        </div>
-        {
-            paginated && <div class="flex items-center content-center justify-end gap-4 px-4">
-                <a href={ '/blog/1' } class="galaxy-gradient-background rounded-full px-4 py-2">Next Page</a>
-            </div>
-        }
-    </ContentSection>
-</Layout> -->
-
 <Layout title="Blog">
-    <h1 class="text-red-500 font-black text-6xl">Blog</h1>
-    <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
+    <Fragment slot="head">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@300&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    </Fragment>
+
+    <h1 class="text-red-500 font-black text-6xl font-[Poppins]">Blog</h1>
+    <h2 class="mt-8 mb-4 text-xl font-[Biryani] text-slate-200">Featured Article</h2>
         <FeaturedBlogArticle post={{ ...featuredArticle  }} />
         <hr class="my-8 border-slate-200/50">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

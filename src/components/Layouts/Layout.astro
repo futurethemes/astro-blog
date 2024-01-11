@@ -1,39 +1,16 @@
 ---
-// import { ViewTransitions } from 'astro:transitions'
-// import { SEO } from 'astro-seo'
-import config from 'virtual:astro-blog-plugin/user-config'
+import { Image } from 'astro:assets'
+import { SEO } from 'astro-seo'
+import Config from 'virtual:astro-blog-plugin/user-config'
+import { logos } from 'virtual:astro-blog-plugin/user-images'
+import { type LayoutProps } from '@futurethemes/astro-blog-plugin'
 
-type Props = {
-    /**
-     * Your page title.
-     */
-    title: string,
+const { title, description, seo } = Astro.props satisfies LayoutProps
 
-    /**
-     * The description of your page.
-     */
-    description: string,
+const { title: siteName, logo: configLogo } = Config
 
-    openGraph?: any,
-}
-
-// import MobileNav from '../Nav/MobileNav.astro'
-// import Footer from '../Footer.astro'
-// import SiteBanner from '@components/SiteBanner.astro'
-// import Starfield from '../Starfield.astro'
-// import Navbar from '../Nav/Navbar.astro'
-
-// const { title, description, openGraph }: Props = Astro.props
-// const canonicalUrl = new URL(Astro.url.pathname, Astro.site)
-
-// const { siteName } = config
+const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
-
-<!-- <script>
-    import '../../scripts/fade-in'
-
-    import '../../styles/global.css'
-</script> -->
 
 <html lang="en" transition:animate="none">
 	<head>
@@ -42,28 +19,40 @@ type Props = {
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 
-        <!-- <SEO
+        <SEO
             {title}
             titleTemplate={`%s - ${ siteName }`}
             {description}
-            canonical={canonicalUrl}
-            {...!!openGraph && {openGraph}}
+            {canonical}
+            {...!!seo?.openGraph && {openGraph: seo.openGraph}}
         />
 
-        <link rel="sitemap" href="/sitemap-index.xml">
-        <ViewTransitions  />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;600;700&family=Titillium+Web:wght@400;900&display=swap" rel="stylesheet"> -->
+        <slot name="head" />
 	</head>
-	<body class="bg-black min-h-[100vh]">
-        <!-- <SiteBanner /> -->
-        <!-- <Navbar /> -->
-		<slot />
-        <!-- <Footer />
-        <Starfield />
-        <MobileNav /> -->
+	<body class="bg-slate-950 min-h-[100vh]">
+        <div class="min-h-[100svh] grid grid-rows-[auto_1fr]">
+            <div>
+                <div class="container mx-auto py-8 px-8 max-w-4xl">
+                    <div class="left">
+                        <a href="/" class="w-16">
+                            {
+                                logos.light && (
+                                    <Image src={ logos.dark } alt={ configLogo?.alt || 'Logo' } class="w-12" />
+                                )
+                            }
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto py-8 px-8 max-w-4xl">
+                <slot />
+            </div>
+        </div>
+        <footer class="bg-indigo-950">
+            <div class="container mx-auto py-8 px-8 max-w-4xl text-gray-200">
+                <p class="text-center">💖</p>
+            </div>
+        </footer>
 	</body>
 </html>
 

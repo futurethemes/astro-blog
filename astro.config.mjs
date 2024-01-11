@@ -8,7 +8,7 @@ export default defineConfig({
   site: 'http://localhost',
   integrations: [tailwind(), AstroBlogPlugin({
     title: 'Test Site',
-    layoutComponent: './src/components/Layouts/Layout2.astro',
+    layoutComponent: './src/components/Layouts/Layout.astro',
     logo: {
       dark: './src/assets/images/logo.png',
       light: './src/assets/images/logo-dark.png',
