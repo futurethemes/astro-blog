@@ -21,17 +21,15 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
                     entrypoint: '@futurethemes/astro-blog-plugin/blog.astro'
                 })
 
-                // injectRoute({
-                //     pattern: '/blog/[page]',
-                //     entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
-                // })
+                injectRoute({
+                    pattern: '/blog/[page]',
+                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
+                })
 
-                // injectRoute({
-                //     pattern: '/blog/[...slug]',
-                //     entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
-                // })
-
-                // injectScript("page-ssr", `import '@astrojs/tailwind/base.css';`);
+                injectRoute({
+                    pattern: '/blog/[...slug]',
+                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
+                })
 
                 try {
                     updateConfig({

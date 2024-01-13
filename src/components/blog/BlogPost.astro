@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets'
+import { type BlogSchemaRawConfig } from '../../schema/BlogSchema'
 
 type Props = {
-	post: any;
+	post: BlogSchemaRawConfig;
 	class?: string;
 }
 
@@ -12,12 +13,12 @@ const { post, class: classes } = Astro.props as Props
 <article class:list={["group", classes]}>
 	<a href={ post.link }>
 		<div class="flex flex-col h-full text-slate-100">
-			<Image src={ post.image } alt={ post.imageAlt } class="block rounded-t-[25px] h-[200px] object-cover shadow group-hover:brightness-105" />
+			<Image src={ post.imageSrc } alt={ post.imageAlt } class="block rounded-t-[25px] h-[200px] object-cover shadow group-hover:brightness-105" />
 
 			<footer class="bg-gradient-to-tr from-sky-600/60 via-indigo-500/60 to-rose-500/60 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 rounded-b-[25px] p-4 grow flex flex-col">
 				<h2 class="font-bold text-4xl mb-4 group-hover:text-sky-500 group-focus:text-sky-500 transition-colors group-hover:underline">{ post.title }</h2>
 				<p class="mb-4 line-clamp-2">{ post.description }</p>
-				<span class="font-semibold mb-2 md:mt-auto">{ post.date }</span>
+				<span class="font-semibold mb-2 md:mt-auto">{ post.datePublished }</span>
 				<button class="bg-indigo-500 block mt-2 px-4 py-2 rounded-full w-full md:w-1/3 text-center">Read</button>
 			</footer>
 		</div>

@@ -3,7 +3,7 @@ title: Andromeda - The Majestic Galaxy
 description: She's big, she's spiraly, and she's into you!
 datePublished: 2023-11-20T22:58:27.197Z
 isDraft: false
-author: Jacob
+author: jacob
 tags: [space]
 imageSrc: './assets/andromeda.jpg'
 imageAlt: 'Andromeda'

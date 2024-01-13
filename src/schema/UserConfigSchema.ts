@@ -87,6 +87,13 @@ export const UserConfigSchema = z.object({
      * @see https://github.com/jonasmerlin/astro-seo/blob/main/src/SEO.astro
      */
     seo: SEOSchema,
+
+    /**
+     * How many blog posts should be visible per page.
+     * 
+     * @default 9
+     */
+    paginateSize: z.number().default(9),
 })
 
 export type AstroBlogPluginConfig = z.infer<typeof UserConfigSchema>

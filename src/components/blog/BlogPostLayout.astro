@@ -1,0 +1,41 @@
+---
+import { Image} from "astro:assets";
+import { type CollectionEntry } from "astro:content";
+import { type AstroComponentFactory } from "astro/runtime/server/index.js";
+import { Layout } from 'virtual:astro-blog-plugin/components'
+import { type BlogSchemaTransformed } from "../../schema/BlogSchema";
+
+import Breadcrumbs from "../Breadcrumbs.astro";
+
+type Props = {
+    entry: BlogSchemaTransformed;
+    Content: AstroComponentFactory;
+}
+
+const { entry, Content } = Astro.props
+---
+
+<Layout title={ entry.title } description={ entry.description }>
+    <div class="blog-post">
+        <Breadcrumbs breadcrumbs={[{href: '/', text: 'Home'}, {href: '/blog', text: 'Blog'}, {text: entry.title}]} />
+        <div class="text-slate-100 md:grid md:grid-cols-[min-content_1fr] md:gap-8">
+            <div>
+                <Image src={entry.imageSrc} alt={entry.imageAlt || ''} class="h-64 rounded-[30px] object-cover md:max-w-xs" />
+                <p class="mt-4">📅 { entry.datePublished }</p>
+                <p class="font-bold font-display text-xl my-4">{ entry.title }</p>
+                <p>{ entry.description }</p>
+                <span class="block mt-4 mb-2">Tags:</span>
+                <div class="flex flex-wrap items-center">
+                    {
+                        entry.tags.map(tag => (
+                            <span class="px-4 py-1 rounded-full bg-rose-400 shadow">{ tag.slug }</span>
+                        ))
+                    }
+                </div>
+            </div>
+            <div>
+                <Content />
+            </div>
+        </div>
+    </div>
+</Layout>

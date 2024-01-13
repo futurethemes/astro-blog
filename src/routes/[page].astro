@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import { getCollection } from "astro:content"
+import Config from 'virtual:astro-blog-plugin/user-config'
+import { Layout } from "virtual:astro-blog-plugin/components";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import BlogPost from "../components/blog/BlogPost.astro";
+import { type BlogSchemaTransformed, type BlogContentCollectionData } from '../schema/BlogSchema'
+import { transformContentCollection } from '../utils/content-collection'
+
+type Props = {
+	page: Page<BlogSchemaTransformed>
+}
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const { paginateSize } = Config
+	const blogCollection = await getCollection('blog')
+
+	let articles: Array<BlogSchemaTransformed> = blogCollection.map(entry => {
+		return transformContentCollection(entry as BlogContentCollectionData)
+	})
+	
+	// Here we want to remove the first 9 elements of the array as they are already shown on the /blog page
+	articles.splice(0, paginateSize)
+
+	if (articles.length === 0) {
+		return []
+	}
+
+	return paginate(articles, { pageSize: paginateSize });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as Props;
+---
+
+<Layout title={ `Blog - Page ${page.currentPage}` } description={ `Blog - Page ${page.currentPage}` }>
+	<Breadcrumbs breadcrumbs={[{href: '/', text: 'Home'}, {href: '/blog', text: 'Blog'}, {text: String(page.currentPage)}]} />
+	
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+		{
+			page.data.map(article => (
+				<BlogPost post={{ ...article }} />
+			))
+		}
+	</div>
+
+	<div class="flex items-center content-center justify-end gap-4 px-4">
+		<a href={ page.url.prev } class="galaxy-gradient-background rounded-full px-4 py-2">Previous Page</a>
+		<a href={ page.url.next } class="galaxy-gradient-background rounded-full px-4 py-2">Next Page</a>
+	</div>
+</Layout>

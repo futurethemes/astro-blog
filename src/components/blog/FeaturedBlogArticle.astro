@@ -12,7 +12,7 @@ const { post, class: classes } = Astro.props as Props
 <article class:list={["group", classes]}>
 	<a href={ post.link }>
 		<div class="grid items-center justify-center content-center gap-4 text-slate-100 group md:gap-10 grid-cols-1 md:grid-cols-[1fr_1fr]">
-			<Image src={ post.image } alt={ post.imageAlt } class="block rounded-[25px] shadow group-hover:brightness-105" />
+			<Image src={ post.imageSrc } alt={ post.imageAlt } class="block rounded-[25px] shadow group-hover:brightness-105" />
 			<div class="flex flex-col h-full">
 				<h2 class="font-bold text-4xl mb-4 group-hover:text-sky-500 group-focus:text-sky-500 transition-colors group-hover:underline">{ post.title }</h2>
 				<p class="mb-4">{ post.description }</p>

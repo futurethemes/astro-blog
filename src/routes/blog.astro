@@ -3,30 +3,26 @@ import { getCollection } from 'astro:content'
 import { Layout } from 'virtual:astro-blog-plugin/components'
 import FeaturedBlogArticle from '../components/blog/FeaturedBlogArticle.astro'
 import BlogPost from '../components/blog/BlogPost.astro'
-import type { ImageMetadata } from 'astro'
+import { type BlogSchemaTransformed, type BlogSchemaRaw, type BlogContentCollectionData } from '../schema/BlogSchema'
+import Config from 'virtual:astro-blog-plugin/user-config'
+import { transformContentCollection } from '../utils/content-collection'
+
+const { paginateSize } = Config
 
 const blogCollection = await getCollection('blog')
 
-let blogArticles = blogCollection.map(entry => {
-    return {
-        title: entry.data.title,
-        description: entry.data.description,
-        slug: entry.slug,
-        link: `${ Astro.url.pathname }/${ entry.slug }`,
-        date: entry.data.datePublished.toDateString(),
-        image: entry.data.imageSrc as ImageMetadata,
-        imageAlt: entry.data.imageAlt,
-    };
+let blogArticles: Array<BlogSchemaTransformed> = blogCollection.map(entry => {
+    return transformContentCollection(entry as BlogContentCollectionData);
 })
 
 const featuredArticle = blogArticles[0]
 
 let paginated = false
 
-if (blogArticles.length > 9) {
+if (blogArticles.length > paginateSize) {
     paginated = true
 
-    blogArticles = blogArticles.toSpliced(0, 9)
+    blogArticles = blogArticles.toSpliced(0, paginateSize)
 }
 
 ---
