@@ -1,5 +1,5 @@
 {
-  "name": "@futurethemes/astro-blog-plugin",
+  "name": "astro-blog",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -14,7 +14,7 @@
     "@astrojs/check": "^0.4.1",
     "@astrojs/mdx": "^2.0.4",
     "@astrojs/tailwind": "^5.1.0",
-    "@futurethemes/astro-blog-plugin": "link:.",
+    "astro-blog": "link:.",
     "astro": "^4.1.2",
     "astro-font": "^0.0.68",
     "astro-seo": "^0.8.0",
