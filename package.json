@@ -7,22 +7,24 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "sync": "astro sync",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
-    "@astrojs/mdx": "^2.0.3",
+    "@astrojs/mdx": "^2.0.4",
     "@astrojs/tailwind": "^5.1.0",
     "@futurethemes/astro-blog-plugin": "link:.",
-    "astro": "^4.1.1",
+    "astro": "^4.1.2",
     "astro-font": "^0.0.68",
     "astro-seo": "^0.8.0",
-    "sharp": "^0.33.1",
+    "sharp": "^0.33.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   },
   "exports": {
     ".": "./index.ts",
+    "./schema": "./src/schema/schema.ts",
     "./blog.astro": "./src/routes/blog.astro",
     "./blog/[page].astro": "./src/routes/[page].astro",
     "./blog/[...slug].astro": "./src/routes/[...slug].astro",
@@ -39,6 +41,6 @@
     "./src/"
   ],
   "devDependencies": {
-    "@types/node": "^20.10.8"
+    "@types/node": "^20.11.0"
   }
 }

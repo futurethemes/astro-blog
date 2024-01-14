@@ -50,8 +50,5 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
     }
 }
 
-export { BlogSchema } from './src/schema/BlogSchema'
-export { AuthorSchema } from './src/schema/AuthorSchema'
-export { TagSchema } from './src/schema/TagSchema'
 export { AstroBlogPluginTailwindContentPaths } from './tailwind.plugin'
 export { type LayoutProps } from './src/types/LayoutProps'

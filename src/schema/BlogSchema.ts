@@ -1,8 +1,10 @@
-import { reference } from 'astro:content';
+import { reference, type SchemaContext } from 'astro:content';
 import { z } from 'astro/zod'
 
-// @ts-ignore
-export const BlogSchema = ({ image }) => z.object({
+import { type AuthorSchemaRaw } from './AuthorSchema';
+import { TagSchema } from './TagSchema';
+
+export const BlogSchema = ({ image }: SchemaContext) => z.object({
     title: z.string(),
     description: z.string(),
     isDraft: z.boolean(),
@@ -21,12 +23,14 @@ export type BlogSchemaRaw = Omit<z.infer<ReturnType<typeof BlogSchema>>, 'imageS
     imageSrc: ImageMetadata;
 }
 
-export type BlogSchemaTransformed = Omit<BlogSchemaRaw, 'datePublished'> & {
+export type BlogSchemaTransformed = Omit<BlogSchemaRaw, 'datePublished' | 'author' | 'tags'> & {
     datePublished: string;
     slug: string;
     link: string;
     render: Function;
     id: string;
+    author: AuthorSchemaRaw,
+    tags: Array<z.infer<typeof TagSchema>>,
 }
 
 export type BlogContentCollectionData = {

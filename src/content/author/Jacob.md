@@ -1,5 +1,6 @@
 ---
 name: Jacob Jenkins
 description: Just some dude, doin some stuff
-image: '../assets/jacob.png'
+imageSrc: '../assets/jacob.png'
+imageAlt: 'One hell of a guy'
 ---

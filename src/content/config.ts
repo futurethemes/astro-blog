@@ -17,6 +17,6 @@ export const collections = {
 
     tag: defineCollection({
         type: 'content',
-        schema: TagSchema(),
+        schema: TagSchema,
     }),
 }

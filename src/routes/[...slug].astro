@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { type BlogContentCollectionData, type BlogSchemaTransformed } from '../schema/BlogSchema'
 import BlogPostLayout from '../components/blog/BlogPostLayout.astro';
 import { transformContentCollection } from '../utils/content-collection'
@@ -11,14 +11,20 @@ type Props = {
 export async function getStaticPaths() {
     const blogEntries = await getCollection('blog')
 
-    return blogEntries.map(entry => ({
-        params: {
-            slug: entry.slug,
-        },
-        props: {
-            entry: transformContentCollection(entry as BlogContentCollectionData),
-        },
-    }));
+    const routes = []
+
+    for (const entry of blogEntries) {
+        routes.push({
+            params: {
+                slug: entry.slug,
+            },
+            props: {
+                entry: await transformContentCollection(entry as BlogContentCollectionData),
+            },
+        })
+    }
+
+    return routes
 }
 
 const { entry } = Astro.props
@@ -41,7 +47,7 @@ const { Content } = await entry.render()
     }
 
     .blog-post :where(h1, h2, h3, h4, h5, h6, p) {
-        @apply mb-1;
+        @apply mb-2;
     }
 
     .blog-post :where(h1, h2, h3, h4, h5, h6) {

@@ -1,12 +1,12 @@
 ---
 title: Andromeda - The Majestic Galaxy
-description: She's big, she's spiraly, and she's into you!
+description: It's a galaxy... From outer space!
 datePublished: 2023-11-20T22:58:27.197Z
 isDraft: false
 author: jacob
 tags: [space]
 imageSrc: './assets/andromeda.jpg'
-imageAlt: 'Andromeda'
+imageAlt: Andromeda
 ---
 
 # 🌌✨ Meet Andromeda

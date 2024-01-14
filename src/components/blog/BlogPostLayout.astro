@@ -1,6 +1,5 @@
 ---
 import { Image} from "astro:assets";
-import { type CollectionEntry } from "astro:content";
 import { type AstroComponentFactory } from "astro/runtime/server/index.js";
 import { Layout } from 'virtual:astro-blog-plugin/components'
 import { type BlogSchemaTransformed } from "../../schema/BlogSchema";
@@ -24,11 +23,22 @@ const { entry, Content } = Astro.props
                 <p class="mt-4">📅 { entry.datePublished }</p>
                 <p class="font-bold font-display text-xl my-4">{ entry.title }</p>
                 <p>{ entry.description }</p>
-                <span class="block mt-4 mb-2">Tags:</span>
+
+                <hr class="border-none py-4">
+
+                <span class="block text-lg font-bold">Author:</span>
+                <p class="block mb-4">{ entry.author.name }</p>
+                {
+                    !!entry.author.imageSrc && <Image src={ entry.author.imageSrc } alt={ entry.author.imageAlt || entry.author.name } class="w-1/2 aspect-square rounded-full block" />
+                }
+
+                <hr class="border-none py-4">
+
+                <span class="block mb-2 text-lg font-bold">Tags:</span>
                 <div class="flex flex-wrap items-center">
                     {
                         entry.tags.map(tag => (
-                            <span class="px-4 py-1 rounded-full bg-rose-400 shadow">{ tag.slug }</span>
+                            <span class="px-4 py-1 rounded-full bg-rose-400 shadow" style={`background-color: ${ tag.bgColor }; color: ${ tag.textColor }`}>{ tag.tag }</span>
                         ))
                     }
                 </div>

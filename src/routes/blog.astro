@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import { Layout } from 'virtual:astro-blog-plugin/components'
 import FeaturedBlogArticle from '../components/blog/FeaturedBlogArticle.astro'
 import BlogPost from '../components/blog/BlogPost.astro'
-import { type BlogSchemaTransformed, type BlogSchemaRaw, type BlogContentCollectionData } from '../schema/BlogSchema'
+import { type BlogSchemaTransformed, type BlogContentCollectionData } from '../schema/BlogSchema'
 import Config from 'virtual:astro-blog-plugin/user-config'
 import { transformContentCollection } from '../utils/content-collection'
 
@@ -11,9 +11,11 @@ const { paginateSize } = Config
 
 const blogCollection = await getCollection('blog')
 
-let blogArticles: Array<BlogSchemaTransformed> = blogCollection.map(entry => {
-    return transformContentCollection(entry as BlogContentCollectionData);
-})
+let blogArticles: Array<BlogSchemaTransformed> = []
+
+for (const entry of blogCollection) {
+    blogArticles.push(await transformContentCollection(entry as BlogContentCollectionData))
+}
 
 const featuredArticle = blogArticles[0]
 
