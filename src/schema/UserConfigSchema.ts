@@ -1,6 +1,6 @@
 import { z } from 'astro/zod'
 
-import { ComponentConfigSchema } from './ComponentConfigSchema'
+// import { ComponentConfigSchema } from './ComponentConfigSchema'
 import { LayoutConfigSchema } from './LayoutConfigSchema'
 import { SEOSchema } from './SEOSchema'
 
@@ -11,14 +11,30 @@ export const UserConfigSchema = z.object({
         .default('My Astro Site')
 		.describe('Title for your website. Will be used in metadata and as browser tab title.'),
 
-	/** Description metadata for your website. Can be used in page metadata. */
-	description: z
-		.string()
-		.optional()
-		.describe('Description metadata for your website. Can be used in page metadata.'),
+    /**
+     * These options will get used on your blog root page: `/blog`
+     */
+    blogRoot: z.object({
+        /**
+         * An object containing config for Astro SEO. 
+         * 
+         * ---
+         * 
+         * @see https://github.com/jonasmerlin/astro-seo/tree/main
+         * @see https://github.com/jonasmerlin/astro-seo/blob/main/src/SEO.astro
+         */
+        seo: SEOSchema,
+
+        /** Description metadata for your website. Can be used in page metadata. */
+        description: z
+            .string()
+            .optional()
+            .describe('Description metadata for your website. Can be used in page metadata.'),
+    }).optional(),
+
 
     /** Specify paths to components that should override Astro Blog Plugin's default components */
-	components: ComponentConfigSchema(),
+	// components: ComponentConfigSchema(),
 
     /**
      * Your standard layout component.
@@ -77,16 +93,6 @@ export const UserConfigSchema = z.object({
             alt: z.string().default(''),
         })
     ]).optional(),
-    
-    /**
-     * An object containing config for Astro SEO. 
-     * 
-     * ---
-     * 
-     * @see https://github.com/jonasmerlin/astro-seo/tree/main
-     * @see https://github.com/jonasmerlin/astro-seo/blob/main/src/SEO.astro
-     */
-    seo: SEOSchema,
 
     /**
      * How many blog posts should be visible per page.
@@ -96,5 +102,5 @@ export const UserConfigSchema = z.object({
     paginateSize: z.number().default(9),
 })
 
-export type AstroBlogPluginConfig = z.infer<typeof UserConfigSchema>
-export type AstroBlogPluginUserConfig = z.input<typeof UserConfigSchema>
+export type AstroBlogConfig = z.infer<typeof UserConfigSchema>
+export type AstroBlogUserConfig = z.input<typeof UserConfigSchema>

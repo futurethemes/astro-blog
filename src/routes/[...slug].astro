@@ -1,11 +1,12 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { type BlogContentCollectionData, type BlogSchemaTransformed } from '../schema/BlogSchema'
+import Config from 'virtual:astro-blog/user-config'
+import { type ArticleContentCollectionData, type ArticleSchemaTransformed } from '../schema/ArticleSchema'
 import BlogPostLayout from '../components/blog/BlogPostLayout.astro';
 import { transformContentCollection } from '../utils/content-collection'
 
 type Props = {
-    entry: BlogSchemaTransformed,
+    entry: ArticleSchemaTransformed,
 }
 
 export async function getStaticPaths() {
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
                 slug: entry.slug,
             },
             props: {
-                entry: await transformContentCollection(entry as BlogContentCollectionData),
+                entry: await transformContentCollection(entry as ArticleContentCollectionData),
             },
         })
     }
@@ -31,7 +32,9 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<BlogPostLayout entry={entry} {Content}>
+<BlogPostLayout article={entry} config={ Config }>
+    <Content />
+</BlogPostLayout>
 
 <style is:global>
     .blog-post h1 {

@@ -3,8 +3,9 @@ import { z } from 'astro/zod'
 
 import { type AuthorSchemaRaw } from './AuthorSchema';
 import { TagSchema } from './TagSchema';
+import { SEOSchema } from './SEOSchema';
 
-export const BlogSchema = ({ image }: SchemaContext) => z.object({
+export const ArticleSchema = ({ image }: SchemaContext) => z.object({
     title: z.string(),
     description: z.string(),
     isDraft: z.boolean(),
@@ -17,13 +18,14 @@ export const BlogSchema = ({ image }: SchemaContext) => z.object({
     tags: z.array(reference('tag')),
     imageSrc: image(),
     imageAlt: z.string().default(''),
+    seo: SEOSchema,
 })
 
-export type BlogSchemaRaw = Omit<z.infer<ReturnType<typeof BlogSchema>>, 'imageSrc'> & {
+export type ArticleSchemaRaw = Omit<z.infer<ReturnType<typeof ArticleSchema>>, 'imageSrc'> & Partial<{
     imageSrc: ImageMetadata;
-}
+}>
 
-export type BlogSchemaTransformed = Omit<BlogSchemaRaw, 'datePublished' | 'author' | 'tags'> & {
+export type ArticleSchemaTransformed = Omit<ArticleSchemaRaw, 'datePublished' | 'author' | 'tags'> & {
     datePublished: string;
     slug: string;
     link: string;
@@ -33,11 +35,11 @@ export type BlogSchemaTransformed = Omit<BlogSchemaRaw, 'datePublished' | 'autho
     tags: Array<z.infer<typeof TagSchema>>,
 }
 
-export type BlogContentCollectionData = {
+export type ArticleContentCollectionData = {
     id: string;
     slug: string;
     body: string;
     collection: string;
     render: Function;
-    data: BlogSchemaRaw;
+    data: ArticleSchemaRaw;
 }

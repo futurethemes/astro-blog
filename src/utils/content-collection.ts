@@ -1,8 +1,8 @@
 import { getEntry, getEntries } from 'astro:content';
-import { type BlogSchemaTransformed, type BlogContentCollectionData } from '../schema/BlogSchema'
+import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from '../schema/ArticleSchema'
 import { type TagSchemaRaw } from '../schema/TagSchema';
 
-export const transformContentCollection = async (contentCollectionData: BlogContentCollectionData): Promise<BlogSchemaTransformed> => {
+export const transformContentCollection = async (contentCollectionData: ArticleContentCollectionData): Promise<ArticleSchemaTransformed> => {
     const { data: author } = await getEntry(contentCollectionData.data.author)
     const tags = await getEntries(contentCollectionData.data.tags)
 
@@ -12,12 +12,13 @@ export const transformContentCollection = async (contentCollectionData: BlogCont
         slug: contentCollectionData.slug,
         link: `/blog/${ contentCollectionData.slug }`,
         datePublished: contentCollectionData.data.datePublished.toDateString(),
-        imageSrc: contentCollectionData.data.imageSrc satisfies ImageMetadata,
+        imageSrc: contentCollectionData.data.imageSrc !== undefined ? contentCollectionData.data.imageSrc satisfies ImageMetadata : undefined,
         imageAlt: contentCollectionData.data.imageAlt,
         author,
         isDraft: contentCollectionData.data.isDraft,
         tags: tags.map(tag => tag.data) satisfies Array<TagSchemaRaw>,
         render: contentCollectionData.render,
         id: contentCollectionData.id,
-    } satisfies BlogSchemaTransformed;
+        seo: contentCollectionData.data.seo,
+    } satisfies ArticleSchemaTransformed;
 }

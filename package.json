@@ -2,6 +2,9 @@
   "name": "astro-blog",
   "type": "module",
   "version": "0.0.1",
+  "description": "Add a blog to your Astro site in just one line",
+  "author": "jdtjenkins (https://futurethemes.io)",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -35,10 +38,16 @@
   "files": [
     "./index.ts",
     "./schema.ts",
-    "./tailwind.config.mjs",
     "./tailwind.plugin.ts",
-    "./virtual.d.ts",
     "./src/"
+  ],
+  "keywords": [
+    "astro",
+    "withastro",
+    "blog",
+    "content",
+    "integration",
+    "astro-integration"
   ],
   "devDependencies": {
     "@types/node": "^20.11.0"

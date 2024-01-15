@@ -1,10 +1,10 @@
-import { AstroBlogPluginTailwindContentPaths } from './tailwind.plugin'
+import { AstroBlogTailwindPaths } from './tailwind.plugin'
 
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: [
         './src/**/*.{astro,html,js,jsx,ts,tsx}',
-        ...AstroBlogPluginTailwindContentPaths,
+        ...AstroBlogTailwindPaths,
     ],
 	theme: {
 		extend: {},

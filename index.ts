@@ -1,12 +1,12 @@
 import type { AstroIntegration } from "astro"
 import { type SafeParseSuccess } from 'astro/zod'
 
-import { UserConfigSchema, type AstroBlogPluginUserConfig, type AstroBlogPluginConfig } from './src/schema/UserConfigSchema'
-import { vitePluginAstroBlogPluginUserConfig } from './src/integrations/virtual-user-config'
+import { UserConfigSchema, type AstroBlogUserConfig, type AstroBlogConfig } from './src/schema/UserConfigSchema'
+import { vitePluginAstroBlogUserConfig } from './src/integrations/virtual-user-config'
 
-export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegration {
+export default function AstroBlog(options: AstroBlogUserConfig): AstroIntegration {
     return {
-        name: '@futurethemes/astro-blog-plugin',
+        name: 'astro-blog',
         hooks: {
             'astro:config:setup': async ({
                 injectRoute,
@@ -14,28 +14,28 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
                 logger,
                 config,
             }) => {
-                const userConfig = UserConfigSchema.safeParse(options) as SafeParseSuccess<AstroBlogPluginConfig>
+                const userConfig = UserConfigSchema.safeParse(options) as SafeParseSuccess<AstroBlogConfig>
                 
                 injectRoute({
                     pattern: '/blog',
-                    entrypoint: '@futurethemes/astro-blog-plugin/blog.astro'
+                    entrypoint: 'astro-blog/blog.astro'
                 })
 
                 injectRoute({
                     pattern: '/blog/[page]',
-                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[page].astro'
+                    entrypoint: 'astro-blog/blog/[page].astro'
                 })
 
                 injectRoute({
                     pattern: '/blog/[...slug]',
-                    entrypoint: '@futurethemes/astro-blog-plugin/blog/[...slug].astro'
+                    entrypoint: 'astro-blog/blog/[...slug].astro'
                 })
 
                 try {
                     updateConfig({
                         vite: {
                             plugins: [
-                                vitePluginAstroBlogPluginUserConfig(userConfig.data, config),
+                                vitePluginAstroBlogUserConfig(userConfig.data, config),
                             ],
                         },
                     })
@@ -50,5 +50,5 @@ export function AstroBlogPlugin(options: AstroBlogPluginUserConfig): AstroIntegr
     }
 }
 
-export { AstroBlogPluginTailwindContentPaths } from './tailwind.plugin'
-export { type LayoutProps } from './src/types/LayoutProps'
+export { AstroBlogTailwindPaths } from './tailwind.plugin'
+export { type AstroBlogLayoutProps } from './src/types/LayoutProps'

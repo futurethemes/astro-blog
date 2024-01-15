@@ -1,12 +1,12 @@
 import { defineCollection } from 'astro:content'
-import { BlogSchema } from '../schema/BlogSchema';
+import { ArticleSchema } from '../schema/ArticleSchema';
 import { AuthorSchema } from '../schema/AuthorSchema';
 import { TagSchema } from '../schema/TagSchema';
 
 export const collections = {
     blog: defineCollection({
         type: 'content',
-        schema: BlogSchema,
+        schema: ArticleSchema,
     }),
 
 

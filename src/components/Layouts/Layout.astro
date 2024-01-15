@@ -1,18 +1,19 @@
 ---
 import { Image } from 'astro:assets'
 import { SEO } from 'astro-seo'
-import Config from 'virtual:astro-blog-plugin/user-config'
-import { logos } from 'virtual:astro-blog-plugin/user-images'
-import { type LayoutProps } from '@futurethemes/astro-blog-plugin'
+import { logos } from 'virtual:astro-blog/user-images'
+import { type AstroBlogLayoutProps } from 'astro-blog'
 
-const { title, description, seo } = Astro.props satisfies LayoutProps
+const { title, description, seo, config } = Astro.props as AstroBlogLayoutProps
 
-const { title: siteName, logo: configLogo } = Config
+console.log(config)
+
+const { title: siteName, logo: configLogo } = config
 
 const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
 
-<html lang="en" transition:animate="none">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -24,7 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
             titleTemplate={`%s - ${ siteName }`}
             {description}
             {canonical}
-            {...!!seo?.openGraph && {openGraph: seo.openGraph}}
+            {...seo}
         />
 
         <slot name="head" />

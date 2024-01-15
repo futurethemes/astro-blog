@@ -2,14 +2,14 @@ import type { AstroConfig, ViteUserConfig } from 'astro'
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { type AstroBlogPluginConfig } from '../schema/UserConfigSchema'
+import { type AstroBlogConfig } from '../schema/UserConfigSchema'
 
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`
 }
 
-export function vitePluginAstroBlogPluginUserConfig(
-	opts: AstroBlogPluginConfig,
+export function vitePluginAstroBlogUserConfig(
+	opts: AstroBlogConfig,
 	{
 		root,
 	}: Pick<AstroConfig, 'root' | 'srcDir' | 'trailingSlash'> & {
@@ -19,7 +19,7 @@ export function vitePluginAstroBlogPluginUserConfig(
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
-	const createUserImagesModule = (opts: AstroBlogPluginConfig) => {
+	const createUserImagesModule = (opts: AstroBlogConfig) => {
 		let imagesModule = ''
 	
 		if (opts.logo) {
@@ -48,9 +48,9 @@ export function vitePluginAstroBlogPluginUserConfig(
 	}
 
     const modules = {
-        'virtual:astro-blog-plugin/user-config': `export default ${ JSON.stringify(opts) }`,
-		'virtual:astro-blog-plugin/components': `export { default as Layout } from ${ resolveId(opts.layoutComponent) };`,
-		'virtual:astro-blog-plugin/user-images': createUserImagesModule(opts),
+        'virtual:astro-blog/user-config': `export default ${ JSON.stringify(opts) }`,
+		'virtual:astro-blog/components': `export { default as Layout } from ${ resolveId(opts.layoutComponent) };`,
+		'virtual:astro-blog/user-images': createUserImagesModule(opts),
     } satisfies Record<string, string>
 
     /** Mapping names prefixed with `\0` to their original form. */
@@ -62,7 +62,7 @@ export function vitePluginAstroBlogPluginUserConfig(
 	)
 
     return {
-		name: 'vite-plugin-astro-blog-plugin-user-config',
+		name: 'vite-plugin-astro-blog-user-config',
 		resolveId(id): string | void {
 			if (id in modules) return resolveVirtualModuleId(id)
 		},

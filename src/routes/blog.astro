@@ -1,20 +1,20 @@
 ---
 import { getCollection } from 'astro:content'
-import { Layout } from 'virtual:astro-blog-plugin/components'
+import { Layout } from 'virtual:astro-blog/components'
 import FeaturedBlogArticle from '../components/blog/FeaturedBlogArticle.astro'
 import BlogPost from '../components/blog/BlogPost.astro'
-import { type BlogSchemaTransformed, type BlogContentCollectionData } from '../schema/BlogSchema'
-import Config from 'virtual:astro-blog-plugin/user-config'
+import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from '../schema/ArticleSchema'
+import Config from 'virtual:astro-blog/user-config'
 import { transformContentCollection } from '../utils/content-collection'
 
-const { paginateSize } = Config
+const { paginateSize, blogRoot } = Config
 
 const blogCollection = await getCollection('blog')
 
-let blogArticles: Array<BlogSchemaTransformed> = []
+let blogArticles: Array<ArticleSchemaTransformed> = []
 
 for (const entry of blogCollection) {
-    blogArticles.push(await transformContentCollection(entry as BlogContentCollectionData))
+    blogArticles.push(await transformContentCollection(entry as ArticleContentCollectionData))
 }
 
 const featuredArticle = blogArticles[0]
@@ -26,17 +26,16 @@ if (blogArticles.length > paginateSize) {
 
     blogArticles = blogArticles.toSpliced(0, paginateSize)
 }
-
 ---
 
-<Layout title="Blog">
+<Layout title="Blog" seo={{...blogRoot?.seo}} config={Config}>
     <h2 class="mt-8 mb-4 text-xl text-slate-200">Featured Article</h2>
-    <FeaturedBlogArticle post={{ ...featuredArticle  }} />
+    <FeaturedBlogArticle article={{ ...featuredArticle  }} />
     <hr class="my-8 border-slate-200/50">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
             blogArticles.map(article => (
-                <BlogPost post={{ ...article }} />
+                <BlogPost article={{ ...article }} />
             ))
         }
     </div>
@@ -45,4 +44,4 @@ if (blogArticles.length > paginateSize) {
             <a href={ '/blog/1' } class="bg-indigo-500 rounded-full px-4 py-2">Next Page</a>
         </div>
     }
-</Layout> 
+</Layout>

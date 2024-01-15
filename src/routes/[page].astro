@@ -1,25 +1,25 @@
 ---
 import type { GetStaticPaths, Page } from "astro";
 import { getCollection } from "astro:content"
-import Config from 'virtual:astro-blog-plugin/user-config'
-import { Layout } from "virtual:astro-blog-plugin/components";
+import Config from 'virtual:astro-blog/user-config'
+import { Layout } from "virtual:astro-blog/components";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import BlogPost from "../components/blog/BlogPost.astro";
-import { type BlogSchemaTransformed, type BlogContentCollectionData } from '../schema/BlogSchema'
+import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from '../schema/ArticleSchema'
 import { transformContentCollection } from '../utils/content-collection'
 
 type Props = {
-	page: Page<BlogSchemaTransformed>
+	page: Page<ArticleSchemaTransformed>
 }
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const { paginateSize } = Config
 	const blogCollection = await getCollection('blog')
 
-	let blogArticles: Array<BlogSchemaTransformed> = []
+	let blogArticles: Array<ArticleSchemaTransformed> = []
 
 	for (const entry of blogCollection) {
-		blogArticles.push(await transformContentCollection(entry as BlogContentCollectionData))
+		blogArticles.push(await transformContentCollection(entry as ArticleContentCollectionData))
 	}
 	
 	// Here we want to remove the first 9 elements of the array as they are already shown on the /blog page
@@ -35,13 +35,13 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props as Props;
 ---
 
-<Layout title={ `Blog - Page ${page.currentPage}` } description={ `Blog - Page ${page.currentPage}` }>
+<Layout title={ `Blog - Page ${page.currentPage}` } description={ `Blog - Page ${page.currentPage}` } config={Config}>
 	<Breadcrumbs breadcrumbs={[{href: '/', text: 'Home'}, {href: '/blog', text: 'Blog'}, {text: String(page.currentPage)}]} />
 	
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 		{
 			page.data.map(article => (
-				<BlogPost post={{ ...article }} />
+				<BlogPost article={{ ...article }} />
 			))
 		}
 	</div>
