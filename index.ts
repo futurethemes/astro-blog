@@ -15,7 +15,7 @@ export default function AstroBlog(options: AstroBlogUserConfig): AstroIntegratio
                 logger,
                 config,
             }) => {
-                const userConfig = UserConfigSchema.safeParse(options) as SafeParseSuccess<AstroBlogConfig>
+                const userConfig = UserConfigSchema.safeParse(options || {}) as SafeParseSuccess<AstroBlogConfig>
 
                 if (!userConfig.success) {
                     const validationError = fromZodError((userConfig as unknown as SafeParseError<AstroBlogConfig>).error)
