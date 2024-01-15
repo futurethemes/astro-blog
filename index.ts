@@ -1,5 +1,6 @@
 import type { AstroIntegration } from "astro"
-import { type SafeParseSuccess } from 'astro/zod'
+import { type SafeParseSuccess, type SafeParseError } from 'astro/zod'
+import { fromZodError } from 'zod-validation-error'
 
 import { UserConfigSchema, type AstroBlogUserConfig, type AstroBlogConfig } from './src/schema/UserConfigSchema'
 import { vitePluginAstroBlogUserConfig } from './src/integrations/virtual-user-config'
@@ -15,6 +16,12 @@ export default function AstroBlog(options: AstroBlogUserConfig): AstroIntegratio
                 config,
             }) => {
                 const userConfig = UserConfigSchema.safeParse(options) as SafeParseSuccess<AstroBlogConfig>
+
+                if (!userConfig.success) {
+                    const validationError = fromZodError((userConfig as unknown as SafeParseError<AstroBlogConfig>).error)
+
+                    logger.error(`Astro Blog Config Error - ${ validationError }`)
+                }
                 
                 injectRoute({
                     pattern: '/blog',
