@@ -17,7 +17,6 @@
     "@astrojs/check": "^0.4.1",
     "@astrojs/mdx": "^2.0.4",
     "@astrojs/tailwind": "^5.1.0",
-    "astro-blog": "link:.",
     "astro": "^4.1.2",
     "astro-font": "^0.0.68",
     "astro-seo": "^0.8.0",
@@ -51,6 +50,7 @@
     "astro-integration"
   ],
   "devDependencies": {
-    "@types/node": "^20.11.0"
+    "@types/node": "^20.11.0",
+    "astro-blog": "link:."
   }
 }
