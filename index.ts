@@ -21,6 +21,8 @@ export default function AstroBlog(options: AstroBlogUserConfig): AstroIntegratio
                     const validationError = fromZodError((userConfig as unknown as SafeParseError<AstroBlogConfig>).error)
 
                     logger.error(`Astro Blog Config Error - ${ validationError }`)
+
+                    throw validationError
                 }
                 
                 injectRoute({
