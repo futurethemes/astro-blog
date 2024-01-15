@@ -1,8 +1,8 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Config from 'virtual:astro-blog/user-config'
 import { type ArticleContentCollectionData, type ArticleSchemaTransformed } from '../schema/ArticleSchema'
-import BlogPostLayout from '../components/blog/BlogPostLayout.astro';
+import ArticleLayout from '../components/blog/ArticleLayout.astro';
 import { transformContentCollection } from '../utils/content-collection'
 
 type Props = {
@@ -32,9 +32,9 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<BlogPostLayout article={entry} config={ Config }>
+<ArticleLayout article={entry} config={ Config }>
     <Content />
-</BlogPostLayout>
+</ArticleLayout>
 
 <style is:global>
     .blog-post h1 {

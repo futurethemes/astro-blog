@@ -20,5 +20,6 @@ export const transformContentCollection = async (contentCollectionData: ArticleC
         render: contentCollectionData.render,
         id: contentCollectionData.id,
         seo: contentCollectionData.data.seo,
+        featured: contentCollectionData.data.featured,
     } satisfies ArticleSchemaTransformed;
 }

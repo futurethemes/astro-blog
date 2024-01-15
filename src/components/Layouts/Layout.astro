@@ -6,8 +6,6 @@ import { type AstroBlogLayoutProps } from 'astro-blog'
 
 const { title, description, seo, config } = Astro.props as AstroBlogLayoutProps
 
-console.log(config)
-
 const { title: siteName, logo: configLogo } = config
 
 const canonical = new URL(Astro.url.pathname, Astro.site)

@@ -1,6 +1,6 @@
 export {
     ArticleSchema,
     type ArticleSchemaTransformed as Article,
-} from './BlogSchema'
+} from './ArticleSchema'
 export { AuthorSchema } from './AuthorSchema'
 export { TagSchema } from './TagSchema'

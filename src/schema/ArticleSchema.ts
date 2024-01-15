@@ -19,6 +19,7 @@ export const ArticleSchema = ({ image }: SchemaContext) => z.object({
     imageSrc: image(),
     imageAlt: z.string().default(''),
     seo: SEOSchema,
+    featured: z.boolean().default(false),
 })
 
 export type ArticleSchemaRaw = Omit<z.infer<ReturnType<typeof ArticleSchema>>, 'imageSrc'> & Partial<{
