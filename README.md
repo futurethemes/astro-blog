@@ -73,6 +73,25 @@ export const collections = {
 }
 ```
 
+### Set up Tailwind
+
+Install Tailwind if you don't already have it installed `astro add tailwind`.
+
+Then in your `tailwind.config.mjs` import the content paths from `astro-blog`:
+
+```diff
++ import { AstroBlogTailwindPaths } from 'astro-blog'
+
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: [
+        './src/**/*.{astro,html,js,jsx,ts,tsx}',
++        ...AstroBlogTailwindPaths, // Very important to spread these as it's an array!
+    ],
+    ...
+}
+```
+
 Now you're all set up to start adding content! 🔥🙌
 
 ### Creating content
