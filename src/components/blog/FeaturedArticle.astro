@@ -23,8 +23,14 @@ const { article, class: classes } = Astro.props as Props
 				<h2 class="font-bold text-4xl mb-4 group-hover:text-sky-500 group-focus:text-sky-500 transition-colors group-hover:underline">{ article.title }</h2>
 				<p class="mb-4">{ article.description }</p>
 				<span class="font-semibold mt-8 mb-2 md:mt-auto">{ article.datePublished }</span>
-				<button class="block mt-2 px-5 py-3 rounded-full text-slate-100 bg-[var(--primary)] bg-indigo-500 w-full md:w-1/2 text-center">Read</button>
+				<button class="block mt-2 px-5 py-3 rounded-full text-slate-100 primary w-full md:w-1/2 text-center">Read</button>
 			</div>
 		</div>
 	</a>
 </article>
+
+<style>
+.primary {
+	background-color: var(--primary, theme('colors.indigo.500'));
+}
+</style>

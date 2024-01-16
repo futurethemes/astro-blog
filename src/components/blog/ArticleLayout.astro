@@ -17,7 +17,7 @@ const { article, config } = Astro.props as Props
 <Layout title={ article.title } description={ article.description } seo={article.seo} {config}>
     <div class="blog-post">
         <Breadcrumbs breadcrumbs={[{href: '/', text: 'Home'}, {href: '/blog', text: 'Blog'}, {text: article.title}]} />
-        <div class="text-slate-100 md:grid md:grid-cols-[min-content_1fr] md:gap-8">
+        <div class="md:grid md:grid-cols-[min-content_1fr] md:gap-8">
             <div>
                 {
                     !!article.imageSrc && (

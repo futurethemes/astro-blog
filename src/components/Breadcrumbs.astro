@@ -10,7 +10,7 @@ const { breadcrumbs } = Astro.props
 ---
 
 { (Array.isArray(breadcrumbs) && breadcrumbs.length > 0) &&
-    <ul class="text-slate-100 flex flex-row items-center min-w-0 my-4">
+    <ul class="flex flex-row items-center flex-wrap min-w-0 my-4">
         {
             breadcrumbs.map(breadcrumb => (
                 <span class="mx-2 first-of-type:hidden last-of-type:text-purple-500 last-of-type:font-semibold">/</span>
