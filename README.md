@@ -1,5 +1,7 @@
+![5](https://github.com/futurethemes/astro-blog-plugin/assets/7649031/41985bbf-db1c-4c10-b479-073d8959330a)
+
 # Astro Blog
-### The fastest way to get a blog started in Astro 🚀
+The fastest way to get a blog started in Astro 🚀
 
 `astro-blog` automatically adds several routes, and provides several schemas to get your blog up and running in minutes, not hours.
 
