@@ -29,7 +29,10 @@
   "exports": {
     ".": "./index.ts",
     "./schema": "./src/schema/schema.ts",
-    "./logos": "./src/integrations/virtual-logos.ts",
+    "./logos": {
+      "import": "./src/integrations/virtual-logos.ts",
+      "types": "./src/integrations/virtual-logos.d.ts"
+    },
     "./config": "./src/integrations/virtual-config.ts",
     "./blog.astro": "./src/routes/blog.astro",
     "./blog/[page].astro": "./src/routes/[page].astro",

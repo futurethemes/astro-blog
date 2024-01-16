@@ -12,18 +12,18 @@ const { article, class: classes } = Astro.props as Props
 
 <article class:list={["group", classes]}>
 	<a href={ article.link }>
-		<div class="flex flex-col h-full text-slate-100">
+		<div class="flex flex-col h-full">
 			{
 				!!article.imageSrc && (
-					<Image src={article.imageSrc} alt={article.imageAlt || ''} class="block rounded-t-[25px] h-[200px] object-cover shadow group-hover:brightness-105" />
+					<Image src={article.imageSrc} alt={article.imageAlt || ''} class="block rounded-[30px] h-[200px] object-cover shadow group-hover:brightness-105" />
 				)
 			}
 
-			<footer class="bg-gradient-to-tr from-sky-600/60 via-indigo-500/60 to-rose-500/60 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 rounded-b-[25px] p-4 grow flex flex-col">
+			<footer class="rounded-b-[25px] p-4 grow flex flex-col">
 				<h2 class="font-bold text-4xl mb-4 group-hover:text-sky-500 group-focus:text-sky-500 transition-colors group-hover:underline">{ article.title }</h2>
 				<p class="mb-4 line-clamp-2">{ article.description }</p>
 				<span class="font-semibold mb-2 md:mt-auto">{ article.datePublished }</span>
-				<button class="bg-indigo-500 block mt-2 px-4 py-2 rounded-full w-full md:w-1/3 text-center">Read</button>
+				<button class="bg-indigo-500 block mt-2 text-slate-100 px-4 py-2 rounded-full w-full md:w-1/3 text-center">Read</button>
 			</footer>
 		</div>
 	</a>

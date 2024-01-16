@@ -13,7 +13,7 @@ const { article, class: classes } = Astro.props as Props
 
 <article class:list={["group", classes]}>
 	<a href={ article.link }>
-		<div class="grid items-center justify-center content-center gap-4 text-slate-100 group md:gap-10 grid-cols-1 md:grid-cols-[1fr_1fr]">
+		<div class="grid items-center justify-center content-center gap-4 group md:gap-10 grid-cols-1 md:grid-cols-[1fr_1fr]">
 			{
 				!!article.imageSrc && (
 					<Image src={ article.imageSrc } alt={ article.imageAlt } class="block rounded-[25px] shadow group-hover:brightness-105" />
@@ -23,7 +23,7 @@ const { article, class: classes } = Astro.props as Props
 				<h2 class="font-bold text-4xl mb-4 group-hover:text-sky-500 group-focus:text-sky-500 transition-colors group-hover:underline">{ article.title }</h2>
 				<p class="mb-4">{ article.description }</p>
 				<span class="font-semibold mt-8 mb-2 md:mt-auto">{ article.datePublished }</span>
-				<button class="block mt-2 px-5 py-3 rounded-full bg-gradient-to-tr from-indigo-500 to-red-500 w-full md:w-1/2 text-center">Read</button>
+				<button class="block mt-2 px-5 py-3 rounded-full text-slate-100 bg-[var(--primary)] bg-indigo-500 w-full md:w-1/2 text-center">Read</button>
 			</div>
 		</div>
 	</a>

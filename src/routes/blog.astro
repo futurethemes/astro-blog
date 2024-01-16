@@ -21,9 +21,9 @@ if (blogArticles.length > paginateSize) {
 ---
 
 <Layout title="Blog" seo={{...blogRoot?.seo}} config={Config}>
-    <h2 class="mt-8 mb-4 text-xl text-slate-200">Featured Article</h2>
+    <h2 class="mt-8 mb-4 text-xl">Featured Article</h2>
     <FeaturedArticle article={{ ...featuredArticle  }} />
-    <hr class="my-8 border-slate-200/50">
+    <hr class="my-8 border-slate-900/50 dark:border-slate-200/50">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
             blogArticles.map(article => (
