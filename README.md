@@ -21,6 +21,8 @@ With built-in pagination, specifying author profiles, creating tags for your art
 - Great support for images out-of-the-box with Astro `<Image>`
 - Allows setting a Featured Post when you set `featured: true` in a blog post!
 
+![Screenshot 2024-01-16 085233](https://github.com/futurethemes/astro-blog-plugin/assets/7649031/e7d12968-4e8b-46db-b6fa-7eda5b23b73a)
+
 ## Installation
 
 ### Astro Add
