@@ -1,10 +1,11 @@
 {
   "name": "astro-blog",
   "type": "module",
-  "version": "0.0.1-beta.4",
+  "version": "0.1.0",
   "description": "Add a blog to your Astro site in just one line",
   "author": "jdtjenkins (https://futurethemes.io)",
   "license": "MIT",
+  "homepage": "https://github.com/futurethemes/astro-blog",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -51,7 +52,6 @@
     "astro-integration"
   ],
   "devDependencies": {
-    "@types/node": "^20.11.0",
-    "astro-blog": "link:."
+    "@types/node": "^20.11.0"
   }
 }
