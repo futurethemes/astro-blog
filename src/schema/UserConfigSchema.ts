@@ -42,12 +42,8 @@ export const UserConfigSchema = z.object({
      * eg:
      * 
      * ```ts
-     * import Layout from './src/Layout.astro'
-     * 
-     * ...
-     * 
      * {
-     *   layoutComponent: Layout
+     *   layoutComponent: './src/components/layouts/Layout.component',
      * }
      * ```
      */
@@ -61,7 +57,9 @@ export const UserConfigSchema = z.object({
      * 
      * ```
      * {
-     *   logo: './src/path/to/image.png',
+     *   logo: {
+     *     src: './src/path/to/image.png',
+     *   }
      * }
      * 
      * OR

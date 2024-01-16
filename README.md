@@ -7,6 +7,20 @@ The fastest way to get a blog started in Astro 🚀
 
 With built-in pagination, specifying author profiles, creating tags for your articles, and also support for draft articles. `astro-blog` should cover everything you need to get creating content for your website.
 
+## Features
+
+`astro-blog` is packed with great features to help you get going asap!
+
+- Support for articles, authors and tags
+- Automatic pagination support with customisable config option `paginationSize`
+    - This also includes generating `/blog/1`, `/blog/2` pages as the pages of posts
+- A simple default layout
+    - This includes amazing SEO support out-of-the-box with `astro-seo`!
+- Great SEO support per page, and also for your `/blog` page itself!
+- Ability to add your own page Layout component. BYOLC... Bring your own Layout Component 👀
+- Great support for images out-of-the-box with Astro `<Image>`
+- Allows setting a Featured Post when you set `featured: true` in a blog post!
+
 ## Installation
 
 ### Astro Add
@@ -35,10 +49,11 @@ Then add the integration to your `astro.config.mjs`
 + import AstroBlog from 'astro-blog'
 
 export default defineConfig{
+    site: 'https://www.mysite.com',
     integrations: [
         ...,
 +       AstroBlog({
-+           site: 'https://www.mysite.com',
++           title: 'My Blog',
 +       })
     ]
 }
@@ -141,22 +156,94 @@ imageAlt: 'Andromeda'
 2) `/blog/:page` these pages are your pagination pages for if you have more than `paginationSize` articles.
 3) `/blog/:article-slug` This is your article!
 
-## Features
-
-`astro-blog` is packed with great features to help you get going asap!
-
-- Support for articles, authors and tags
-- Automatic pagination support with customisable config option `paginationSize`
-    - This also includes generating `/blog/1`, `/blog/2` pages as the pages of posts
-- A simple default layout
-    - This includes amazing SEO support out-of-the-box with `astro-seo`!
-- Great SEO support per page, and also for your `/blog` page itself!
-- Ability to add your own page Layout component. BYOLC... Bring your own Layout Component 👀
-- Great support for images out-of-the-box with Astro `<Image>`
-
 ### Config Options
 
-... I'll do this tomorrow, I'm tired!
+#### Title
+
+Title for your website. Will be used in metadata and as browser tab title.
+
+```ts
+AstroBlog({
+    title: 'My Site',
+})
+```
+
+#### blogRoot
+
+These options will get used on your blog root page: `/blog`
+
+##### blogRoot.seo
+
+An object containing config for Astro SEO. 
+
+```ts
+AstroBlog({
+    blogRoot: {
+        seo: {
+            description: 'A really cool description full of key words!',
+        },
+    },
+})
+```
+
+
+##### blogRoot.description
+
+Description metadata for your website. Can be used in page metadata.
+
+```ts
+AstroBlog({
+    blogRoot: {
+        description: 'A really cool description full of key words!',
+    },
+})
+```
+
+#### layoutComponent
+
+Your standard layout component.
+
+```ts
+AstroBlog({
+    layoutComponent: './src/components/layouts/Layout.component',
+})
+```
+
+#### logo
+
+A string of a path to your logo image.
+Or you can specify a light and dark version of your logo
+
+```ts
+AstroBlog({
+    logo: {
+        src: './src/path/to/image.png',
+    }
+})
+```
+
+OR
+
+```ts
+AstroBlog({
+    logo: {
+        light: './src/path/to/image.png',
+        dark: './src/path/to/dark-image.png',
+    }
+})
+```
+
+#### paginateSize
+
+_default: 9_
+
+How many blog posts should be visible per page.
+
+```ts
+AstroBlog({
+    paginateSize: 6,
+})
+```
 
 ### License
 
