@@ -114,6 +114,14 @@ imageAlt: 'Andromeda'
 ...
 ```
 
+## Routes
+
+`astro-blog` add 3 routes to your app:
+
+1) `/blog` this will be the home of all your articles. By default it will show as many articles as specified by your `paginationSize` (default 9). And if you have more than 9 articles, it'll show the pagination buttons.
+2) `/blog/:page` these pages are your pagination pages for if you have more than `paginationSize` articles.
+3) `/blog/:article-slug` This is your article!
+
 ## Features
 
 `astro-blog` is packed with great features to help you get going asap!
