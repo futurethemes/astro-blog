@@ -1,7 +1,7 @@
 {
   "name": "astro-blog",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Add a blog to your Astro site in just one line",
   "author": "jdtjenkins (https://futurethemes.io)",
   "license": "MIT",
@@ -29,6 +29,8 @@
   "exports": {
     ".": "./index.ts",
     "./schema": "./src/schema/schema.ts",
+    "./logos": "./src/integrations/virtual-logos.ts",
+    "./config": "./src/integrations/virtual-config.ts",
     "./blog.astro": "./src/routes/blog.astro",
     "./blog/[page].astro": "./src/routes/[page].astro",
     "./blog/[...slug].astro": "./src/routes/[...slug].astro",

@@ -4,3 +4,4 @@ export {
 } from './ArticleSchema'
 export { AuthorSchema } from './AuthorSchema'
 export { TagSchema } from './TagSchema'
+export { type LogosConfig as AstroBlogLogosConfig } from './LogosSchema'

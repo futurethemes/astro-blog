@@ -31,14 +31,16 @@ export function vitePluginAstroBlogUserConfig(
 				throw new Error(' `logo` config is incorrect. You must specify at least one of `src`, `dark` or `light`.')
 			}
 
+			const alt = opts.logo.alt || ''
+
 			if ('src' in opts.logo) {
 				const src = resolveId(opts.logo.src)
-				imagesModule = `import src from ${src}; export const logos = { dark: src, light: src };`
+				imagesModule = `import src from ${src}; export const logos = { dark: src, light: src, alt: '${ alt }' };`
 			} else {
 				const dark = resolveId(opts.logo.dark)
 				const light = resolveId(opts.logo.light)
 
-				imagesModule = `import dark from ${dark}; import light from ${light}; export const logos = { dark, light };`
+				imagesModule = `import dark from ${dark}; import light from ${light}; export const logos = { dark, light, alt: '${ alt }' };`
 			}
 		} else {
 			imagesModule = 'export const logos = {}'

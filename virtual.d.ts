@@ -13,5 +13,6 @@ declare module 'virtual:astro-blog/user-images' {
 	export const logos: {
 		dark?: ImageMetadata;
 		light?: ImageMetadata;
+		alt?: string;
 	};
 }
