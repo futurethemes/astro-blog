@@ -30,13 +30,24 @@ const { article, config } = Astro.props as Props
 
                 <hr class="border-none py-4">
 
-                <span class="block text-lg font-bold">Author:</span>
-                <p class="block mb-4">{ article.author.name }</p>
                 {
-                    !!article.author.imageSrc && <Image src={ article.author.imageSrc } alt={ article.author.imageAlt || article.author.name } class="w-1/2 aspect-square rounded-full block" />
+                    (!!article.author && !!article.author.name) && (
+                        <>
+                            <span class="block text-lg font-bold">Author:</span>
+                            <p class="block mb-4">{ article.author.name || 'Author' }</p>
+                            {
+                                !!article.author.imageSrc && <Image src={ article.author.imageSrc } alt={ article.author.imageAlt || article.author.name } class="w-1/2 aspect-square rounded-full block mb-4" />
+                            }
+
+                            {
+                                !!article.author.description && <p class="block mb-4">{ article.author.description }</p>
+                            }
+
+                            <hr class="border-none py-4">
+                        </>
+                    )
                 }
 
-                <hr class="border-none py-4">
 
                 <span class="block mb-2 text-lg font-bold">Tags:</span>
                 <div class="flex flex-wrap items-center">

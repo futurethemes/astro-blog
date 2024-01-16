@@ -1,4 +1,3 @@
-// import { reference, type SchemaContext } from 'astro:content';
 import { z } from 'astro/zod'
 
 import { type AuthorSchemaRaw } from './AuthorSchema';

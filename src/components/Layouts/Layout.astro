@@ -33,10 +33,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
             <div>
                 <div class="container mx-auto p-8 pb-0 max-w-4xl">
                     <div class="left">
-                        <a href="/" class="w-16">
+                        <a href="/" class="block">
                             {
                                 logos.light && (
-                                    <Image src={ logos.dark } alt={ configLogo?.alt || 'Logo' } class="w-12" />
+                                    <Image src={ logos.light } alt={ configLogo?.alt || 'Logo' } class="w-12" />
+                                )
+                            }
+                            {
+                                !logos.light && (
+                                    <span class="block text-gray-100 font-semibold px-6 py-3 rounded-full bg-gradient-to-tr from-rose-500 to-indigo-500 w-max">Home</span>
                                 )
                             }
                         </a>
