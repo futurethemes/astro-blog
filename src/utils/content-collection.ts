@@ -3,8 +3,9 @@ import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from
 import { type TagSchemaRaw } from '../schema/TagSchema';
 
 export const transformContentCollection = async (contentCollectionData: ArticleContentCollectionData): Promise<ArticleSchemaTransformed> => {
-    const { data: author } = await getEntry(contentCollectionData.data.author)
-    const tags = await getEntries(contentCollectionData.data.tags)
+
+    const { data: author } = await getEntry('author', contentCollectionData.data.author)
+    const tags = await getEntries(contentCollectionData.data.tags.map(slug => ({ collection: 'tag', slug, })))
 
     return {
         title: contentCollectionData.data.title,

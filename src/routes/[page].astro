@@ -1,12 +1,11 @@
 ---
 import type { GetStaticPaths, Page } from "astro";
-import { getCollection } from "astro:content"
 import Config from 'virtual:astro-blog/user-config'
 import { Layout } from "virtual:astro-blog/components";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ArticleCard from "../components/blog/ArticleCard.astro";
-import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from '../schema/ArticleSchema'
-import { transformContentCollection } from '../utils/content-collection'
+import { type ArticleSchemaTransformed } from '../schema/ArticleSchema'
+import { getArticles } from '../utils/routing'
 
 type Props = {
 	page: Page<ArticleSchemaTransformed>
@@ -14,22 +13,16 @@ type Props = {
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const { paginateSize } = Config
-	const blogCollection = await getCollection('blog')
-
-	let blogArticles: Array<ArticleSchemaTransformed> = []
-
-	for (const entry of blogCollection) {
-		blogArticles.push(await transformContentCollection(entry as ArticleContentCollectionData))
-	}
+	const articles = await getArticles()
 	
 	// Here we want to remove the first 9 elements of the array as they are already shown on the /blog page
-	blogArticles.splice(0, paginateSize)
+	articles.splice(0, paginateSize)
 
-	if (blogArticles.length === 0) {
+	if (articles.length === 0) {
 		return []
 	}
 
-	return paginate(blogArticles, { pageSize: paginateSize });
+	return paginate(articles, { pageSize: paginateSize });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props as Props;

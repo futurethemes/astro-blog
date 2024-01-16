@@ -8,6 +8,6 @@ export const AuthorSchema = ({ image }: SchemaContext) => z.object({
     imageAlt: z.string().optional()
 })
 
-export type AuthorSchemaRaw = Omit<z.infer<ReturnType<typeof AuthorSchema>>, 'imageSrc'> & Partial<{
+export type AuthorSchemaRaw = Omit<z.infer<ReturnType<typeof AuthorSchema>>, 'imageSrc'> & {
     imageSrc: ImageMetadata;
-}>
+}

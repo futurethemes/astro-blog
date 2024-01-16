@@ -1,25 +1,13 @@
 ---
-import { getCollection } from 'astro:content'
 import { Layout } from 'virtual:astro-blog/components'
 import FeaturedArticle from '../components/blog/FeaturedArticle.astro'
 import ArticleCard from '../components/blog/ArticleCard.astro'
-import { type ArticleSchemaTransformed, type ArticleContentCollectionData } from '../schema/ArticleSchema'
 import Config from 'virtual:astro-blog/user-config'
-import { transformContentCollection } from '../utils/content-collection'
+import { getArticles } from '../utils/routing'
 
 const { paginateSize, blogRoot } = Config
 
-const blogCollection = await getCollection('blog')
-
-let blogArticles: Array<ArticleSchemaTransformed> = []
-    
-for (const entry of blogCollection) {
-    if (entry.data.isDraft) {
-        continue
-    }
-    
-    blogArticles.push(await transformContentCollection(entry as ArticleContentCollectionData))
-}
+let blogArticles = await getArticles()
 
 let featuredArticle = blogArticles.find(article => article.featured) || blogArticles[0]
 

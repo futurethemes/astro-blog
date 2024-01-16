@@ -1,17 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import Config from 'virtual:astro-blog/user-config'
-import { type ArticleContentCollectionData, type ArticleSchemaTransformed } from '../schema/ArticleSchema'
+import { type ArticleSchemaTransformed } from '../schema/ArticleSchema'
 import ArticleLayout from '../components/blog/ArticleLayout.astro';
-import { transformContentCollection } from '../utils/content-collection'
+import { getArticles } from '../utils/routing'
 
 type Props = {
     entry: ArticleSchemaTransformed,
 }
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('blog')
-
+    const blogEntries = await getArticles()
     const routes = []
 
     for (const entry of blogEntries) {
@@ -20,7 +18,7 @@ export async function getStaticPaths() {
                 slug: entry.slug,
             },
             props: {
-                entry: await transformContentCollection(entry as ArticleContentCollectionData),
+                entry,
             },
         })
     }

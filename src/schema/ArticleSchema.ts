@@ -1,11 +1,11 @@
-import { reference, type SchemaContext } from 'astro:content';
+// import { reference, type SchemaContext } from 'astro:content';
 import { z } from 'astro/zod'
 
 import { type AuthorSchemaRaw } from './AuthorSchema';
 import { TagSchema } from './TagSchema';
 import { SEOSchema } from './SEOSchema';
 
-export const ArticleSchema = ({ image }: SchemaContext) => z.object({
+export const ArticleSchema = ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     isDraft: z.boolean(),
@@ -13,18 +13,18 @@ export const ArticleSchema = ({ image }: SchemaContext) => z.object({
     /**
      * A string of the unique id of the author
      */
-    author: reference('author'),
+    author: z.string(),
     datePublished: z.date(),
-    tags: z.array(reference('tag')),
+    tags: z.array(z.string()),
     imageSrc: image(),
     imageAlt: z.string().default(''),
     seo: SEOSchema,
     featured: z.boolean().default(false),
 })
 
-export type ArticleSchemaRaw = Omit<z.infer<ReturnType<typeof ArticleSchema>>, 'imageSrc'> & Partial<{
+export type ArticleSchemaRaw = Omit<z.infer<ReturnType<typeof ArticleSchema>>, 'imageSrc'> & {
     imageSrc: ImageMetadata;
-}>
+}
 
 export type ArticleSchemaTransformed = Omit<ArticleSchemaRaw, 'datePublished' | 'author' | 'tags'> & {
     datePublished: string;
