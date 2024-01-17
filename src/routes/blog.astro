@@ -13,8 +13,6 @@ let featuredArticle = blogArticles.find(article => article.featured) || blogArti
 
 let paginated = false
 
-console.log(paginateSize, blogArticles.length)
-
 if (blogArticles.length > paginateSize) {
     paginated = true
 
@@ -35,7 +33,13 @@ if (blogArticles.length > paginateSize) {
     </div>
     {
         paginated && <div class="flex items-center content-center justify-end gap-4 px-4">
-            <a href={ '/blog/1' } class="bg-indigo-500 rounded-full px-4 py-2">Next Page</a>
+            <a href={ '/blog/1' } class="primary text-slate-100 rounded-full px-4 py-2">Next Page</a>
         </div>
     }
 </Layout>
+
+<style>
+    .primary {
+        background-color: var(--primary, theme('colors.indigo.500'));
+    }
+</style>

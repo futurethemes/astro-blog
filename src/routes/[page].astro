@@ -40,12 +40,18 @@ const { page } = Astro.props as Props;
 	</div>
 
 	<div class="flex items-center content-center justify-end gap-4 px-4">
-		<a href={ page.url.prev || '/blog' } class="bg-indigo-500 rounded-full px-4 py-2">Previous Page</a>
+		<a href={ page.url.prev || '/blog' } class="primary text-slate-100 rounded-full px-4 py-2">Previous Page</a>
 
 		{
 			page.url.next && (
-				<a href={ page.url.next } class="bg-indigo-500 rounded-full px-4 py-2">Next Page</a>
+				<a href={ page.url.next } class="primary text-slate-100 rounded-full px-4 py-2">Next Page</a>
 			)
 		}
 	</div>
 </Layout>
+
+<style>
+    .primary {
+        background-color: var(--primary, theme('colors.indigo.500'));
+    }
+</style>
