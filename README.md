@@ -7,6 +7,8 @@ The fastest way to get a blog started in Astro 🚀
 
 With built-in pagination, specifying author profiles, creating tags for your articles, and also support for draft articles. `astro-blog` should cover everything you need to get creating content for your website.
 
+Demo here: [astro-blog.futurethemes.io](https://astro-blog.futurethemes.io)
+
 ## Features
 
 `astro-blog` is packed with great features to help you get going asap!
