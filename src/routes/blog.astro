@@ -13,10 +13,12 @@ let featuredArticle = blogArticles.find(article => article.featured) || blogArti
 
 let paginated = false
 
+console.log(paginateSize, blogArticles.length)
+
 if (blogArticles.length > paginateSize) {
     paginated = true
 
-    blogArticles = blogArticles.toSpliced(0, paginateSize)
+    blogArticles = blogArticles.splice(0, paginateSize)
 }
 ---
 

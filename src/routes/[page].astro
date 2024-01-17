@@ -13,7 +13,7 @@ type Props = {
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const { paginateSize } = Config
-	const articles = await getArticles()
+	let articles = await getArticles()
 	
 	// Here we want to remove the first 9 elements of the array as they are already shown on the /blog page
 	articles.splice(0, paginateSize)
@@ -40,7 +40,12 @@ const { page } = Astro.props as Props;
 	</div>
 
 	<div class="flex items-center content-center justify-end gap-4 px-4">
-		<a href={ page.url.prev } class="galaxy-gradient-background rounded-full px-4 py-2">Previous Page</a>
-		<a href={ page.url.next } class="galaxy-gradient-background rounded-full px-4 py-2">Next Page</a>
+		<a href={ page.url.prev || '/blog' } class="bg-indigo-500 rounded-full px-4 py-2">Previous Page</a>
+
+		{
+			page.url.next && (
+				<a href={ page.url.next } class="bg-indigo-500 rounded-full px-4 py-2">Next Page</a>
+			)
+		}
 	</div>
 </Layout>

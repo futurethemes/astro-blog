@@ -21,7 +21,7 @@ const { article, config } = Astro.props as Props
             <div>
                 {
                     !!article.imageSrc && (
-                        <Image src={article.imageSrc} alt={article.imageAlt || ''} class="h-64 rounded-[30px] object-cover md:max-w-xs" />
+                        <Image src={article.imageSrc} alt={article.imageAlt || ''} class="h-64 rounded-[20px] object-cover md:max-w-xs drop-shadow-lg" />
                     )
                 }
                 <p class="mt-4">📅 { article.datePublished }</p>
@@ -36,7 +36,7 @@ const { article, config } = Astro.props as Props
                             <span class="block text-lg font-bold">Author:</span>
                             <p class="block mb-4">{ article.author.name || 'Author' }</p>
                             {
-                                !!article.author.imageSrc && <Image src={ article.author.imageSrc } alt={ article.author.imageAlt || article.author.name } class="w-1/2 aspect-square rounded-full block mb-4" />
+                                !!article.author.imageSrc && <Image src={ article.author.imageSrc } alt={ article.author.imageAlt || article.author.name } class="w-1/2 aspect-square rounded-full block mb-4 drop-shadow-lg" />
                             }
 
                             {
