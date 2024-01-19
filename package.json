@@ -5,7 +5,11 @@
   "description": "Add a blog to your Astro site in just one line",
   "author": "jdtjenkins (https://futurethemes.io)",
   "license": "MIT",
-  "homepage": "https://github.com/futurethemes/astro-blog",
+  "homepage": "https://astro-blog.futurethemes.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/futurethemes/astro-blog.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -54,7 +58,9 @@
     "blog",
     "content",
     "integration",
-    "astro-integration"
+    "astro-integration",
+    "astro-component",
+    "ui"
   ],
   "devDependencies": {
     "@types/node": "^20.11.0"
