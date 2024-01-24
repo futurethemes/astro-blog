@@ -5,7 +5,9 @@ import ArticleCard from '../components/blog/ArticleCard.astro'
 import Config from 'virtual:astro-blog/user-config'
 import { getArticles } from '../utils/routing'
 
-const { paginateSize, blogRoot } = Config
+const { paginateSize, blogRoot, prerender: _prerender } = Config
+
+export const prerender = _prerender
 
 let blogArticles = await getArticles()
 
