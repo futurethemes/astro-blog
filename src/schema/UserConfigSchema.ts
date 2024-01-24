@@ -98,6 +98,11 @@ export const UserConfigSchema = z.object({
      * @default 9
      */
     paginateSize: z.number().default(9),
+
+    /**
+     * If you're working in an SSR environment you can set the pages astro-blog provides to be prerendered
+     */
+    prerender: z.boolean().default(true)
 })
 
 export type AstroBlogConfig = z.infer<typeof UserConfigSchema>

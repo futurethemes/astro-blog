@@ -249,6 +249,18 @@ AstroBlog({
 })
 ```
 
+#### prerender
+
+_default: true_
+
+Specify whether you want your blog pages to be prerendered. Useful for SSR/Hybrid environments.
+
+```ts
+AstroBlog({
+    prerender: true,
+})
+```
+
 ### License
 
 MIT - 2024-present, jdtjenkins

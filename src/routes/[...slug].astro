@@ -4,6 +4,10 @@ import { type ArticleSchemaTransformed } from '../schema/ArticleSchema'
 import ArticleLayout from '../components/blog/ArticleLayout.astro';
 import { getArticles } from '../utils/routing'
 
+const { prerender: _prerender } = Config
+
+export const prerender = _prerender
+
 type Props = {
     entry: ArticleSchemaTransformed,
 }
