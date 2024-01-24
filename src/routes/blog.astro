@@ -7,6 +7,8 @@ import { getArticles } from '../utils/routing'
 
 const { paginateSize, blogRoot } = Config
 
+export const prerender = true
+
 let blogArticles = await getArticles()
 
 let featuredArticle = blogArticles.find(article => article.featured) || blogArticles[0]
