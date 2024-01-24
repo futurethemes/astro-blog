@@ -7,10 +7,6 @@ import ArticleCard from "../components/blog/ArticleCard.astro";
 import { type ArticleSchemaTransformed } from '../schema/ArticleSchema'
 import { getArticles } from '../utils/routing'
 
-const { prerender: _prerender } = Config
-
-export const prerender = _prerender
-
 type Props = {
 	page: Page<ArticleSchemaTransformed>
 }

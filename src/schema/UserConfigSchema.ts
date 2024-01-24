@@ -102,7 +102,7 @@ export const UserConfigSchema = z.object({
     /**
      * If you're working in an SSR environment you can set the pages astro-blog provides to be prerendered
      */
-    prerender: z.boolean().default(true)
+    // prerender: z.boolean().default(true)
 })
 
 export type AstroBlogConfig = z.infer<typeof UserConfigSchema>
