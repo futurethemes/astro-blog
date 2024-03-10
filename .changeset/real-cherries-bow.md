@@ -1,5 +1,0 @@
----
-"astro-blog": patch
----
-
-merge

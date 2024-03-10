@@ -1,5 +1,11 @@
 # astro-blog
 
+## 0.2.2
+
+### Patch Changes
+
+- 192f55c: merge
+
 ## 0.2.1
 
 ### Patch Changes
