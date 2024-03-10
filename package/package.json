@@ -1,0 +1,72 @@
+{
+  "name": "astro-blog",
+  "type": "module",
+  "version": "0.2.1",
+  "description": "Add a blog to your Astro site in just one line",
+  "author": "jdtjenkins (https://futurethemes.io)",
+  "license": "MIT",
+  "homepage": "https://astro-blog.futurethemes.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/futurethemes/astro-blog.git"
+  },
+  "private": false,
+  "access": "public",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "sync": "astro sync",
+    "astro": "astro",
+    "tailwind:build": "tailwind -o ./src/styles/styles.css -m"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/mdx": "^2.0.4",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.4.15",
+    "astro-font": "^0.0.68",
+    "astro-integration-kit": "^0.5.1",
+    "astro-seo": "^0.8.3",
+    "sharp": "^0.33.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "zod-validation-error": "^2.1.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/schema.ts",
+    "./logos": {
+      "import": "./src/integrations/virtual-logos.ts",
+      "types": "./src/integrations/virtual-logos.d.ts"
+    },
+    "./config": "./src/integrations/virtual-config.ts",
+    "./styles": "./src/styles/styles.css",
+    "./tailwind": "./tailwind.plugin.ts",
+    "./blog.astro": "./src/routes/blog.astro",
+    "./blog/[page].astro": "./src/routes/[page].astro",
+    "./blog/[...slug].astro": "./src/routes/[...slug].astro",
+    "./components/Layout.astro": "./src/components/Layouts/Layout.astro",
+    "./components/FeaturedArticle.astro": "./src/components/blog/FeaturedArticle.astro",
+    "./components/ArticleCard.astro": "./src/components/blog/ArticleCard.astro",
+    "./components/ArticleLayout.astro": "./src/components/blog/ArticleLayout.astro"
+  },
+  "files": [
+    "./src/",
+    "./tailwind.plugin.ts"
+  ],
+  "keywords": [
+    "astro",
+    "withastro",
+    "blog",
+    "content",
+    "integration",
+    "astro-integration",
+    "astro-component",
+    "ui"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.0"
+  }
+}
